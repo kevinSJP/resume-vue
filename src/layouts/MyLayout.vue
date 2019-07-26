@@ -26,14 +26,14 @@
       content-class="bg-grey-2"
     >
       <q-list>
-        <q-item-label header>项目分类</q-item-label>
+        <q-item-label header>简历项目</q-item-label>
         <q-item clickable tag="a" target="_blank" href="https://quasar.dev">
           <q-item-section avatar>
             <q-icon name="school" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>Docs</q-item-label>
-            <q-item-label caption>quasar.dev</q-item-label>
+            <q-item-label>申请职位</q-item-label>
+            <q-item-label caption>填写您要申请的职位</q-item-label>
           </q-item-section>
         </q-item>
         <q-item clickable tag="a" target="_blank" href="https://github.quasar.dev">
@@ -41,8 +41,8 @@
             <q-icon name="code" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>Github</q-item-label>
-            <q-item-label caption>github.com/quasarframework</q-item-label>
+            <q-item-label>基本信息</q-item-label>
+            <q-item-label caption>个人基本信息</q-item-label>
           </q-item-section>
         </q-item>
         <q-item clickable tag="a" target="_blank" href="https://chat.quasar.dev">
@@ -50,8 +50,8 @@
             <q-icon name="chat" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>Discord Chat Channel</q-item-label>
-            <q-item-label caption>chat.quasar.dev</q-item-label>
+            <q-item-label>教育信息</q-item-label>
+            <q-item-label caption>填写从高中开始的所有教育经历</q-item-label>
           </q-item-section>
         </q-item>
         <q-item clickable tag="a" target="_blank" href="https://forum.quasar.dev">
@@ -59,8 +59,8 @@
             <q-icon name="record_voice_over" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>Forum</q-item-label>
-            <q-item-label caption>forum.quasar.dev</q-item-label>
+            <q-item-label>工作/实习经历</q-item-label>
+            <q-item-label caption>填写全部的工作、实习经历</q-item-label>
           </q-item-section>
         </q-item>
         <q-item clickable tag="a" target="_blank" href="https://twitter.quasar.dev">
@@ -68,8 +68,8 @@
             <q-icon name="rss_feed" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>Twitter</q-item-label>
-            <q-item-label caption>@quasarframework</q-item-label>
+            <q-item-label>资格证书</q-item-label>
+            <q-item-label caption>填写通过各类考试获得的证书</q-item-label>
           </q-item-section>
         </q-item>
         <q-item clickable tag="a" target="_blank" href="https://facebook.quasar.dev">
@@ -77,8 +77,53 @@
             <q-icon name="public" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>Facebook</q-item-label>
-            <q-item-label caption>@QuasarFramework</q-item-label>
+            <q-item-label>家庭信息</q-item-label>
+            <q-item-label caption>填写父母配偶的信息</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item clickable tag="a" target="_blank" href="https://facebook.quasar.dev">
+          <q-item-section avatar>
+            <q-icon name="public" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>奖励信息</q-item-label>
+            <q-item-label caption>获得的各类奖项</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item clickable tag="a" target="_blank" href="https://facebook.quasar.dev">
+          <q-item-section avatar>
+            <q-icon name="public" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>项目经验</q-item-label>
+            <q-item-label caption>参加过的项目经历</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item clickable tag="a" target="_blank" href="https://facebook.quasar.dev">
+          <q-item-section avatar>
+            <q-icon name="public" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>社会活动</q-item-label>
+            <q-item-label caption>参加过的社工活动经历</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item clickable tag="a" target="_blank" href="https://facebook.quasar.dev">
+          <q-item-section avatar>
+            <q-icon name="public" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>其他信息</q-item-label>
+            <q-item-label caption>个人简评及推荐人</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item clickable tag="a" target="_blank" href="https://facebook.quasar.dev">
+          <q-item-section avatar>
+            <q-icon name="public" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>简历附件</q-item-label>
+            <q-item-label caption>上传简历</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
