@@ -377,12 +377,12 @@ export default {
   methods: {
     goNatural () {
       this.$router.push({
-        path: '/index/natural'
+        path: '/natural'
       })
     },
     goApply () {
       this.$router.push({
-        path: '/index/apply'
+        path: '/apply'
       })
     }
   }
