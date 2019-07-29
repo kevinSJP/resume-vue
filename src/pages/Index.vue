@@ -35,38 +35,20 @@
       <q-separator white/>
       <q-card-section>
         <table>
-        <tr> <td>姓名：</td> <td>{{EmployeeInfo.resumeNatural.name}}</td>  </tr>
-        <tr> <td>性别：</td> <td>{{EmployeeInfo.resumeNatural.sex | genderFilter}}</td> </tr>
-        <tr> <td>证件类型：</td> <td>{{EmployeeInfo.resumeNatural.cardType | cardFilter}}</td> </tr>
-        <tr> <td>证件号码：</td> <td>{{EmployeeInfo.resumeNatural.cardNo}}</td> </tr>
-        <tr> <td>籍贯：</td> <td>{{EmployeeInfo.resumeNatural.nativePlace | areaFilter}}</td> </tr>
-        <tr> <td>户口所在地：</td> <td>{{EmployeeInfo.resumeNatural.hukouPlace | areaFilter}}</td> </tr>
-        <tr> <td>出生日期：</td> <td>{{EmployeeInfo.resumeNatural.birthDate | dateFilter}}</td> </tr>
-        <tr> <td>政治面貌：</td> <td>{{EmployeeInfo.resumeNatural.polity | polityFilter}}</td> </tr>
-        <tr> <td>婚姻状况：</td> <td>{{EmployeeInfo.resumeNatural.maritalStatus | maritalFilter}}</td> </tr>
-        <tr> <td>身高：</td> <td>{{EmployeeInfo.resumeNatural.height}}cm</td> </tr>
-        <tr> <td>体重：</td> <td>{{EmployeeInfo.resumeNatural.weight}}kg</td> </tr>
-        </table>
-      </q-card-section>
-    </q-card>
-    <!--通讯信息-->
-    <q-card inline class="my-card bg-grey-1">
-      <q-card-section  class="q-py-none">
-        <div class="row items-center no-wrap">
-          <div class="col">
-            <div class="text-h6">通讯信息</div>
-          </div>
-          <div class="col-auto">
-            <q-btn color="grey-7" round flat icon="edit"></q-btn>
-          </div>
-        </div>
-      </q-card-section>
-      <q-separator white/>
-      <q-card-section>
-        <table>
-        <tr> <td>电话：</td> <td>{{EmployeeInfo.resumeCommunication.tel}} </td> </tr>
-        <tr> <td>邮箱：</td> <td>{{EmployeeInfo.resumeCommunication.email}}</td> </tr>
-        <tr> <td>通讯地址：</td> <td>{{EmployeeInfo.resumeNatural.currentPlace}}</td> </tr>
+          <tr> <td>姓名：</td> <td>{{EmployeeInfo.resumeNatural.name}}</td>  </tr>
+          <tr> <td>性别：</td> <td>{{EmployeeInfo.resumeNatural.sex | genderFilter}}</td> </tr>
+          <tr> <td>证件类型：</td> <td>{{EmployeeInfo.resumeNatural.cardType | cardFilter}}</td> </tr>
+          <tr> <td>证件号码：</td> <td>{{EmployeeInfo.resumeNatural.cardNo}}</td> </tr>
+          <tr> <td>籍贯：</td> <td>{{EmployeeInfo.resumeNatural.nativePlace | areaFilter}}</td> </tr>
+          <tr> <td>户口所在地：</td> <td>{{EmployeeInfo.resumeNatural.hukouPlace | areaFilter}}</td> </tr>
+          <tr> <td>出生日期：</td> <td>{{EmployeeInfo.resumeNatural.birthDate | dateFilter}}</td> </tr>
+          <tr> <td>政治面貌：</td> <td>{{EmployeeInfo.resumeNatural.polity | polityFilter}}</td> </tr>
+          <tr> <td>婚姻状况：</td> <td>{{EmployeeInfo.resumeNatural.maritalStatus | maritalFilter}}</td> </tr>
+          <tr> <td>身高：</td> <td>{{EmployeeInfo.resumeNatural.height}}cm</td> </tr>
+          <tr> <td>体重：</td> <td>{{EmployeeInfo.resumeNatural.weight}}kg</td> </tr>
+          <tr> <td>电话：</td> <td>{{EmployeeInfo.resumeCommunication.tel}} </td> </tr>
+          <tr> <td>邮箱：</td> <td>{{EmployeeInfo.resumeCommunication.email}}</td> </tr>
+          <tr><td>通讯地址：</td> <td>{{EmployeeInfo.resumeNatural.currentPlace}}</td> </tr>
         </table>
       </q-card-section>
     </q-card>
@@ -112,6 +94,28 @@
             <td style="text-align: center ; width: 10%">{{index+1}} </td>
             <td style="text-align: left">自{{item.beginDate | dateFilter}}至{{item.endDate | dateFilter}}在
               {{item.companyName}}{{item.departmentName}}工作，职位{{item.positionName }}</td>
+          </tr>
+        </table>
+      </q-card-section>
+    </q-card>
+    <!--资格证书-->
+    <q-card inline class="my-card bg-grey-1">
+      <q-card-section  class="q-py-none">
+        <div class="row items-center no-wrap">
+          <div class="col">
+            <div class="text-h6">资格证书</div>
+          </div>
+          <div class="col-auto">
+            <q-btn color="grey-7" round flat icon="edit"></q-btn>
+          </div>
+        </div>
+      </q-card-section>
+      <q-separator white/>
+      <q-card-section>
+        <table style="width: 100%">
+          <tr v-for="(item, index) in EmployeeInfo.resumeQualification" :key="index">
+            <td style="text-align: center ; width: 10%">{{index+1}} </td>
+            <td style="text-align: left">{{item.getDate | dateFilter}}获得{{item.qualificationName}}证书，由{{item.qualificationOrg }}颁发</td>
           </tr>
         </table>
       </q-card-section>
@@ -238,6 +242,9 @@ import { whetherType, cardType, genderType, polityType, maritalType, areaType, c
 
 export default {
   name: 'resume',
+  mounted () {
+    // this.getWebData()
+  },
   data () {
     return {
       EmployeeInfo: { applyStatus: 'applyStatus',
@@ -473,12 +480,22 @@ export default {
   methods: {
     goNatural () {
       this.$router.push({
-        path: '/natural'
+        path: '/natural',
+        name: 'natural',
+        params: {
+          resumeNatural: this.EmployeeInfo.resumeNatural,
+          resumeCommunication: this.EmployeeInfo.resumeCommunication
+        }
       })
     },
     goApply () {
       this.$router.push({
-        path: '/apply'
+        path: '/apply',
+        name: 'apply',
+        params: {
+          jobApply: this.EmployeeInfo.jobApply,
+          jobApply2: this.EmployeeInfo.jobApply2
+        }
       })
     }
   }
