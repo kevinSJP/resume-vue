@@ -14,8 +14,10 @@
       </q-card-section>
       <q-separator white/>
       <q-card-section>
-        <div>期望职位：{{EmployeeInfo.jobApply}} </div>
-        <div>求职意向：{{EmployeeInfo.jobApply2}} </div>
+        <table>
+          <tr> <td>期望职位：</td> <td>{{EmployeeInfo.jobApply}}</td> </tr>
+          <tr> <td>求职意向：</td> <td>{{EmployeeInfo.jobApply2}}</td> </tr>
+        </table>
       </q-card-section>
     </q-card>
     <!--基本信息-->
@@ -32,9 +34,19 @@
       </q-card-section>
       <q-separator white/>
       <q-card-section>
-        <div>姓名：{{EmployeeInfo.resumeNatural.name}}  </div>
-        <div>证件类型：{{EmployeeInfo.resumeNatural.cardType}} </div>
-        <div>证件号码：{{EmployeeInfo.resumeNatural.cardNo}} </div>
+        <table>
+        <tr> <td>姓名：</td> <td>{{EmployeeInfo.resumeNatural.name}}</td>  </tr>
+        <tr> <td>性别：</td> <td>{{EmployeeInfo.resumeNatural.sex | genderFilter}}</td> </tr>
+        <tr> <td>证件类型：</td> <td>{{EmployeeInfo.resumeNatural.cardType | cardFilter}}</td> </tr>
+        <tr> <td>证件号码：</td> <td>{{EmployeeInfo.resumeNatural.cardNo}}</td> </tr>
+        <tr> <td>籍贯：</td> <td>{{EmployeeInfo.resumeNatural.nativePlace | areaFilter}}</td> </tr>
+        <tr> <td>户口所在地：</td> <td>{{EmployeeInfo.resumeNatural.hukouPlace | areaFilter}}</td> </tr>
+        <tr> <td>出生日期：</td> <td>{{EmployeeInfo.resumeNatural.birthDate | dateFilter}}</td> </tr>
+        <tr> <td>政治面貌：</td> <td>{{EmployeeInfo.resumeNatural.polity | polityFilter}}</td> </tr>
+        <tr> <td>婚姻状况：</td> <td>{{EmployeeInfo.resumeNatural.maritalStatus | maritalFilter}}</td> </tr>
+        <tr> <td>身高：</td> <td>{{EmployeeInfo.resumeNatural.height}}cm</td> </tr>
+        <tr> <td>体重：</td> <td>{{EmployeeInfo.resumeNatural.weight}}kg</td> </tr>
+        </table>
       </q-card-section>
     </q-card>
     <!--通讯信息-->
@@ -51,8 +63,11 @@
       </q-card-section>
       <q-separator white/>
       <q-card-section>
-        <div>电话：{{EmployeeInfo.resumeCommunication.tel}} </div>
-        <div>  邮箱：{{EmployeeInfo.resumeCommunication.email}}</div>
+        <table>
+        <tr> <td>电话：</td> <td>{{EmployeeInfo.resumeCommunication.tel}} </td> </tr>
+        <tr> <td>邮箱：</td> <td>{{EmployeeInfo.resumeCommunication.email}}</td> </tr>
+        <tr> <td>通讯地址：</td> <td>{{EmployeeInfo.resumeNatural.currentPlace}}</td> </tr>
+        </table>
       </q-card-section>
     </q-card>
     <!--教育信息-->
@@ -69,8 +84,13 @@
       </q-card-section>
       <q-separator white/>
       <q-card-section>
-        <div v-for="(item, index) in EmployeeInfo.resumeEducation" :key="index">学校：{{item.schoolName}} &nbsp;
-          专业：{{item.collegeName}}</div>
+        <table style="width: 100%">
+          <tr v-for="(item, index) in EmployeeInfo.resumeEducation" :key="index">
+            <td style="text-align: center ; width: 10%">{{index+1}} </td>
+            <td style="text-align: left">自{{item.beginDate | dateFilter}}至{{item.endDate | dateFilter}}
+              就读于{{item.schoolName}}{{item.specialtyName}}专业获得{{item.certificateLevel | cerFilter}}学历</td>
+          </tr>
+        </table>
       </q-card-section>
     </q-card>
     <!--工作经历-->
@@ -87,8 +107,13 @@
       </q-card-section>
       <q-separator white/>
       <q-card-section>
-        <div v-for="(item, index) in EmployeeInfo.resumeInternship" :key="index">公司：{{item.companyName}} &nbsp;
-          部门：{{item.departmentName}}</div>
+        <table style="width: 100%">
+          <tr v-for="(item, index) in EmployeeInfo.resumeInternship" :key="index">
+            <td style="text-align: center ; width: 10%">{{index+1}} </td>
+            <td style="text-align: left">自{{item.beginDate | dateFilter}}至{{item.endDate | dateFilter}}在
+              {{item.companyName}}{{item.departmentName}}工作，职位{{item.positionName }}</td>
+          </tr>
+        </table>
       </q-card-section>
     </q-card>
     <!--家庭成员-->
@@ -105,8 +130,13 @@
       </q-card-section>
       <q-separator white/>
       <q-card-section>
-        <div v-for="(item, index) in EmployeeInfo.resumeFamily" :key="index">姓名：{{item.name}} &nbsp;
-          工作单位：{{item.company}}</div>
+        <table style="width: 100%">
+          <tr v-for="(item, index) in EmployeeInfo.resumeFamily" :key="index">
+            <td style="text-align: center ; width: 10%">{{index+1}} </td>
+            <td style="text-align: left">{{item.relationship | familyFilter}}是{{item.name }}在
+              {{item.company}}工作，政治面貌{{item.polity | polityFilter}}</td>
+          </tr>
+        </table>
       </q-card-section>
     </q-card>
     <!--奖励信息-->
@@ -123,8 +153,12 @@
       </q-card-section>
       <q-separator white/>
       <q-card-section>
-        <div v-for="(item, index) in EmployeeInfo.resumeReward" :key="index">奖励名称：{{item.rewardName}} &nbsp;
-          奖励等级：{{item.rewardLevel}}</div>
+        <table style="width: 100%">
+          <tr v-for="(item, index) in EmployeeInfo.resumeReward" :key="index">
+            <td style="text-align: center ; width: 10%">{{index+1}} </td>
+            <td style="text-align: left">{{item.rewardDate | dateFilter}}获得{{item.rewardName}}({{item.rewardLevel | awardFilter}})奖励</td>
+          </tr>
+        </table>
       </q-card-section>
     </q-card>
     <!--项目经历-->
@@ -141,8 +175,13 @@
       </q-card-section>
       <q-separator white/>
       <q-card-section>
-        <div v-for="(item, index) in EmployeeInfo.resumeProject" :key="index">项目名称：{{item.projectName}} &nbsp;
-          团队角色角色：{{item.projectRole}}</div>
+        <table style="width: 100%">
+          <tr v-for="(item, index) in EmployeeInfo.resumeProject" :key="index">
+            <td style="text-align: center ; width: 10%">{{index+1}} </td>
+            <td style="text-align: left">自{{item.beginDate | dateFilter}}至{{item.endDate | dateFilter}}参与项目：
+              {{item.projectName}}，在团队中担任{{item.projectRole}}角色</td>
+          </tr>
+        </table>
       </q-card-section>
     </q-card>
     <!--社会活动-->
@@ -159,8 +198,13 @@
       </q-card-section>
       <q-separator white/>
       <q-card-section>
-        <div v-for="(item, index) in EmployeeInfo.resumeSchoolActivities" :key="index">名称：{{item.name}} &nbsp;
-          说明：{{item.remark}}</div>
+        <table style="width: 100%">
+          <tr v-for="(item, index) in EmployeeInfo.resumeSchoolActivities" :key="index">
+            <td style="text-align: center ; width: 10%">{{index+1}} </td>
+            <td style="text-align: left">自{{item.beginDate | dateFilter}}至{{item.endDate | dateFilter}}参与
+              {{item.name}}取得成果如下成果，{{item.remark}}</td>
+          </tr>
+        </table>
       </q-card-section>
     </q-card>
     <!--其他信息-->
@@ -177,17 +221,21 @@
       </q-card-section>
       <q-separator white/>
       <q-card-section>
-        <div >是否推荐：{{EmployeeInfo.resumeOtherInfo.isFamilymember}} </div>
-        <div >  自我评价：{{EmployeeInfo.resumeOtherInfo.remark}}</div>
+        <table>
+        <tr> <td>是否推荐：</td> <td>{{EmployeeInfo.resumeOtherInfo.isFamilymember | whetherFilter}} </td> </tr>
+        <tr> <td>推荐人：</td> <td>{{EmployeeInfo.resumeOtherInfo.isFamilymemberName | NullFilter}} </td> </tr>
+        <tr> <td>是否接受调配：</td> <td>{{EmployeeInfo.resumeOtherInfo.isPostDeployment | whetherFilter}} </td> </tr>
+        <tr> <td>自我评价：</td> <td>{{EmployeeInfo.resumeOtherInfo.remark}}</td> </tr>
+        </table>
       </q-card-section>
     </q-card>
   </q-page>
 </template>
 
-<style>
-</style>
-
 <script>
+
+import { whetherType, cardType, genderType, polityType, maritalType, areaType, cerType, familyType, awardType } from '../constant/index'
+
 export default {
   name: 'resume',
   data () {
@@ -359,19 +407,67 @@ export default {
           name: '111',
           remark: '1',
           schoolName: '1' }]
-      },
-      cardType: [
-        {
-          label: '大陆身份证',
-          value: '0'
-        }, {
-          label: '港澳台',
-          value: '1'
-        }, {
-          label: '外籍身份证',
-          value: '2'
+      }
+    }
+  },
+  filters: {
+    //      return cardType.find(item => item.value === value[value.length - 1]).label
+    whetherFilter (value) {
+      if (value) {
+        return whetherType.find(item => item.value === value).label
+      }
+    },
+    cardFilter (value) {
+      if (value) {
+        return cardType.find(item => item.value === value).label
+      }
+    },
+    genderFilter (value) {
+      if (value) {
+        return genderType.find(item => item.value === value).label
+      }
+    },
+    polityFilter (value) {
+      if (value) {
+        return polityType.find(item => item.value === value).label
+      }
+    },
+    maritalFilter (value) {
+      if (value) {
+        return maritalType.find(item => item.value === value).label
+      }
+    },
+    cerFilter (value) {
+      if (value) {
+        return cerType.find(item => item.value === value).label
+      }
+    },
+    familyFilter (value) {
+      if (value) {
+        return familyType.find(item => item.value === value).label
+      }
+    },
+    awardFilter (value) {
+      if (value) {
+        return awardType.find(item => item.value === value).label
+      }
+    },
+    areaFilter (value) {
+      return areaType.find(item => item.value === value).label
+    },
+    dateFilter (value) {
+      if (value) {
+        if (value.length === 10) {
+          return parseInt(value.substr(0, 4)) + '年' + parseInt(value.substr(5, 2)) + '月' + parseInt(value.substr(8, 2)) + '号'
         }
-      ]
+        if (value.length === 7) {
+          return parseInt(value.substr(0, 4)) + '年' + parseInt(value.substr(5, 2)) + '月'
+        }
+      }
+    },
+    NullFilter (value) {
+      if (!value) return '无'
+      return value
     }
   },
   methods: {
