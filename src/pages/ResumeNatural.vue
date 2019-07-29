@@ -11,7 +11,27 @@
       spellcheck="false"
     >
       <q-input filled readonly  v-model="EmployeeInfo.resumeNatural.name" label="姓名" />
-      <q-input filled type="number" v-model.number="EmployeeInfo.resumeNatural.height" label="身高" />
+      <q-select filled v-model="EmployeeInfo.resumeNatural.cardType" :options="cardType" emit-value map-options label="证件类型" />
+      <q-input filled readonly  v-model="EmployeeInfo.resumeNatural.cardNo" label="证件号码" />
+      <q-select  v-model="EmployeeInfo.resumeNatural.sex" :options="genderType" emit-value map-options label="性别" />
+      <q-input  v-model="EmployeeInfo.resumeNatural.birthDate" mask="date" :rules="['date']" label="出生日期">
+        <template v-slot:append>
+          <q-icon name="event" class="cursor-pointer">
+            <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
+              <q-date v-model="EmployeeInfo.resumeNatural.birthDate" @input="() => $refs.qDateProxy.hide()" />
+            </q-popup-proxy>
+          </q-icon>
+        </template>
+      </q-input>
+      <q-select  v-model="EmployeeInfo.resumeNatural.nativePlace" :options="areaType" emit-value map-options label="籍贯" />
+      <q-select  v-model="EmployeeInfo.resumeNatural.hukouPlace" :options="areaType" emit-value map-options label="户口所在地" />
+      <q-select  v-model="EmployeeInfo.resumeNatural.polity" :options="polityType" emit-value map-options label="政治面貌" />
+      <q-select  v-model="EmployeeInfo.resumeNatural.maritalStatus" :options="maritalType" emit-value map-options label="婚姻状况" />
+      <q-input  type="number" v-model.number="EmployeeInfo.resumeNatural.height" label="身高(cm)" />
+      <q-input  type="number" v-model.number="EmployeeInfo.resumeNatural.weight" label="体重(kg)" />
+      <q-input  readonly  v-model="EmployeeInfo.resumeCommunication.tel" label="电话" />
+      <q-input  readonly  v-model="EmployeeInfo.resumeCommunication.email" label="邮箱" />
+      <q-input  readonly  v-model="EmployeeInfo.resumeNatural.currentPlace" label="通讯地址" />
       <div>
         <q-btn label="提交" @click="onSave"  color="primary"/>
         <q-btn label="保存" type="submit"  color="primary" flat class="q-ml-sm" />
@@ -24,6 +44,8 @@
 </template>
 
 <script>
+import { cardType, areaType, genderType, polityType, maritalType } from '../constant/index'
+
 export default {
   name: 'natural',
   mounted () {
@@ -58,7 +80,12 @@ export default {
           id: 52,
           modifiedTime: '2019-06-05',
           tel: '13222222222' }
-      }
+      },
+      cardType,
+      areaType,
+      genderType,
+      polityType,
+      maritalType
     }
   },
   methods: {
