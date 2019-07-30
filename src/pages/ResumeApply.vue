@@ -27,8 +27,7 @@
 export default {
   name: 'natural',
   mounted () {
-    this.EmployeeInfo.jobApply = this.$route.params.jobApply
-    this.EmployeeInfo.jobApply2 = this.$route.params.jobApply2
+    this.EmployeeInfo = this.$route.params.EmployeeInfo
     // console.log(this.$route.params.jobApply)
   },
   data () {

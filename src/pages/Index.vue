@@ -60,7 +60,7 @@
             <div class="text-h6">教育信息</div>
           </div>
           <div class="col-auto">
-            <q-btn color="grey-7" round flat icon="edit"></q-btn>
+            <q-btn color="grey-7" round flat icon="edit" @click="goEducation"></q-btn>
           </div>
         </div>
       </q-card-section>
@@ -83,7 +83,7 @@
             <div class="text-h6">工作经历</div>
           </div>
           <div class="col-auto">
-            <q-btn color="grey-7" round flat icon="edit"></q-btn>
+            <q-btn color="grey-7" round flat icon="edit" @click="goInternship"></q-btn>
           </div>
         </div>
       </q-card-section>
@@ -106,7 +106,7 @@
             <div class="text-h6">资格证书</div>
           </div>
           <div class="col-auto">
-            <q-btn color="grey-7" round flat icon="edit"></q-btn>
+            <q-btn color="grey-7" round flat icon="edit" @click="goQualification"></q-btn>
           </div>
         </div>
       </q-card-section>
@@ -128,7 +128,7 @@
             <div class="text-h6">家庭成员</div>
           </div>
           <div class="col-auto">
-            <q-btn color="grey-7" round flat icon="edit"></q-btn>
+            <q-btn color="grey-7" round flat icon="edit" @click="goFamily"></q-btn>
           </div>
         </div>
       </q-card-section>
@@ -151,7 +151,7 @@
             <div class="text-h6">奖励信息</div>
           </div>
           <div class="col-auto">
-            <q-btn color="grey-7" round flat icon="edit"></q-btn>
+            <q-btn color="grey-7" round flat icon="edit" @click="goReward"></q-btn>
           </div>
         </div>
       </q-card-section>
@@ -173,7 +173,7 @@
             <div class="text-h6">项目经历</div>
           </div>
           <div class="col-auto">
-            <q-btn color="grey-7" round flat icon="edit"></q-btn>
+            <q-btn color="grey-7" round flat icon="edit" @click="goProject"></q-btn>
           </div>
         </div>
       </q-card-section>
@@ -196,7 +196,7 @@
             <div class="text-h6">社会活动</div>
           </div>
           <div class="col-auto">
-            <q-btn color="grey-7" round flat icon="edit"></q-btn>
+            <q-btn color="grey-7" round flat icon="edit" @click="goSchoolActivities"></q-btn>
           </div>
         </div>
       </q-card-section>
@@ -219,7 +219,7 @@
             <div class="text-h6">其他信息</div>
           </div>
           <div class="col-auto">
-            <q-btn color="grey-7" round flat icon="edit"></q-btn>
+            <q-btn color="grey-7" round flat icon="edit" @click="goOtherInfo"></q-btn>
           </div>
         </div>
       </q-card-section>
@@ -483,8 +483,79 @@ export default {
         path: '/natural',
         name: 'natural',
         params: {
-          resumeNatural: this.EmployeeInfo.resumeNatural,
-          resumeCommunication: this.EmployeeInfo.resumeCommunication
+          EmployeeInfo: this.EmployeeInfo
+        }
+      })
+    },
+    goEducation () {
+      this.$router.push({
+        path: '/education',
+        name: 'education',
+        params: {
+          EmployeeInfo: this.EmployeeInfo
+        }
+      })
+    },
+    goInternship () {
+      this.$router.push({
+        path: '/internship',
+        name: 'internship',
+        params: {
+          EmployeeInfo: this.EmployeeInfo
+        }
+      })
+    },
+    goQualification () {
+      this.$router.push({
+        path: '/qualification',
+        name: 'qualification',
+        params: {
+          EmployeeInfo: this.EmployeeInfo
+        }
+      })
+    },
+    goFamily () {
+      this.$router.push({
+        path: '/family',
+        name: 'family',
+        params: {
+          EmployeeInfo: this.EmployeeInfo
+        }
+      })
+    },
+    goReward () {
+      this.$router.push({
+        path: '/reward',
+        name: 'reward',
+        params: {
+          EmployeeInfo: this.EmployeeInfo
+        }
+      })
+    },
+    goProject () {
+      this.$router.push({
+        path: '/project',
+        name: 'project',
+        params: {
+          EmployeeInfo: this.EmployeeInfo
+        }
+      })
+    },
+    goSchoolActivities () {
+      this.$router.push({
+        path: '/schoolActivities',
+        name: 'schoolActivities',
+        params: {
+          EmployeeInfo: this.EmployeeInfo
+        }
+      })
+    },
+    goOtherInfo () {
+      this.$router.push({
+        path: '/otherInfo',
+        name: 'otherInfo',
+        params: {
+          EmployeeInfo: this.EmployeeInfo
         }
       })
     },
@@ -493,8 +564,7 @@ export default {
         path: '/apply',
         name: 'apply',
         params: {
-          jobApply: this.EmployeeInfo.jobApply,
-          jobApply2: this.EmployeeInfo.jobApply2
+          EmployeeInfo: this.EmployeeInfo
         }
       })
     }
