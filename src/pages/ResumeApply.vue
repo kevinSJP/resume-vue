@@ -27,8 +27,12 @@
 export default {
   name: 'natural',
   mounted () {
-    this.EmployeeInfo = this.$route.params.EmployeeInfo
-    // console.log(this.$route.params.jobApply)
+    if (this.$route.params.EmployeeInfo) {
+      this.EmployeeInfo = this.$route.params.EmployeeInfo
+      // console.log(this.$route.params.jobApply)
+    } else {
+      this.getWebData()
+    }
   },
   data () {
     return {
@@ -56,6 +60,9 @@ export default {
       //     message: 'Submitted'
       //   })
       // }
+    },
+    getWebData () {
+      return this.EmployeeInfo
     },
     onBack () {
       console.log('back')
