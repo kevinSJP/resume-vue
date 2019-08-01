@@ -10,8 +10,8 @@
       autocomplete="off"
       spellcheck="false"
     >
-      <q-input filled  v-model="EmployeeInfo.jobApply" label="期望职位" />
-      <q-input filled  v-model="EmployeeInfo.jobApply2" label="求职意向" />
+      <q-input ref="jobApply" clearable  v-model="EmployeeInfo.jobApply" label="期望职位*" lazy-rules :rules="[val => !!val || '必填']" />
+      <q-input ref="jobApply2" clearable  v-model="EmployeeInfo.jobApply2" label="求职意向*" lazy-rules :rules="[val => !!val || '必填']" />
       <div>
         <q-btn label="提交" @click="onSave"  color="primary"/>
         <q-btn label="保存" type="submit"  color="primary" flat class="q-ml-sm" />
@@ -39,12 +39,21 @@ export default {
       EmployeeInfo: {
         jobApply: '信息化',
         jobApply2: '信息化'
-      }
+      },
+      hasError: ''
     }
   },
   methods: {
     onSubmit () {
       console.log(this.EmployeeInfo.jobApply)
+      this.$refs.jobApply.validate()
+      this.$refs.jobApply2.validate()
+      if (this.$refs.jobApply.hasError || this.$refs.jobApply2.hasError) {
+        this.formHasError = true
+        this.hasError = this.formHasError
+      } else {
+        this.hasError = false
+      }
       // if (this.accept !== true) {
       //   this.$q.notify({
       //     color: 'red-5',
@@ -73,9 +82,12 @@ export default {
     onSave () {
       console.log('save')
       this.onSubmit()
-      this.$router.push({
-        path: '/'
-      })
+      console.log(this.hasError)
+      if (!this.hasError) {
+        this.$router.push({
+          path: '/'
+        })
+      }
     }
   }
 }
