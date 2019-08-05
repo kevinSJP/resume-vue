@@ -44,8 +44,35 @@ export const awardType = [
   { value: '5', label: '集团级' },
   { value: '6', label: '下属公司/部门级' },
   { value: '9', label: '其他' }]
+// 学习方式
+export const studyStyle = [
+  { value: '1', label: '全日制' },
+  { value: '2', label: '非全日制' }]
+// 专业类别
+export const SpecialType = [
+  { value: '1', label: '哲学' },
+  { value: '2', label: '经济学' },
+  { value: '3', label: '法学' },
+  { value: '4', label: '教育学' },
+  { value: '5', label: '文学' },
+  { value: '6', label: '历史学' },
+  { value: '7', label: '理学' },
+  { value: '8', label: '工学' },
+  { value: '9', label: '农学' },
+  { value: '10', label: '医学' },
+  { value: '11', label: '管理学' },
+  { value: '12', label: '军事学' },
+  { value: '100', label: '其他' }]
 // 学历
 export const cerType = [
+  { value: '11', label: '博士研究生' },
+  { value: '12', label: '硕士研究生' },
+  { value: '21', label: '大学本科' },
+  { value: '31', label: '中专' },
+  { value: '32', label: '大专' },
+  { value: '4', label: '高中' }]
+// 学位
+export const degreeType = [
   { value: '11', label: '博士研究生' },
   { value: '12', label: '硕士研究生' },
   { value: '21', label: '大学本科' },
@@ -457,3 +484,15 @@ export const areaType = [
   { value: '139001', label: '河北省定州市' },
   { value: '139002', label: '河北省辛集市' },
   { value: '451400', label: '广西壮族自治区崇左市' }]
+// 编号
+export const NoType = [
+  { value: 1, label: '一' },
+  { value: 2, label: '二' },
+  { value: 3, label: '三' },
+  { value: 4, label: '四' },
+  { value: 5, label: '五' },
+  { value: 6, label: '六' },
+  { value: 7, label: '七' },
+  { value: 8, label: '八' },
+  { value: 9, label: '九' },
+  { value: 10, label: '十' }]

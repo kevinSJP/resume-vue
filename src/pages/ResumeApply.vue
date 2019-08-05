@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  name: 'natural',
+  name: 'apply',
   mounted () {
     if (this.$route.params.EmployeeInfo) {
       this.EmployeeInfo = this.$route.params.EmployeeInfo

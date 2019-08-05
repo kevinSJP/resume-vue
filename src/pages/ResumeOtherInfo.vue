@@ -29,7 +29,7 @@
 import { whetherType } from '../constant/index'
 
 export default {
-  name: 'natural',
+  name: 'otherInfo',
   computed: {
     isFamily () {
       return !(this.EmployeeInfo.resumeOtherInfo.isFamilymember === '1' && !this.EmployeeInfo.resumeOtherInfo.isFamilymemberName)

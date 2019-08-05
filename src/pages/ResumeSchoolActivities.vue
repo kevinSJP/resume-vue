@@ -10,31 +10,25 @@
       autocomplete="off"
       spellcheck="false"
     >
-      <q-input filled readonly  v-model="EmployeeInfo.resumeNatural.name" label="姓名" />
-      <q-select filled v-model="EmployeeInfo.resumeNatural.cardType" :options="cardType" emit-value map-options label="证件类型" />
-      <q-input filled readonly  v-model="EmployeeInfo.resumeNatural.cardNo" label="证件号码" />
-      <q-select  v-model="EmployeeInfo.resumeNatural.sex" :options="genderType" emit-value map-options label="性别" />
-      <q-input  v-model="EmployeeInfo.resumeNatural.birthDate" mask="date" :rules="['date']" label="出生日期">
-        <template v-slot:append>
-          <q-icon name="event" class="cursor-pointer">
-            <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
-              <q-date v-model="EmployeeInfo.resumeNatural.birthDate" @input="() => $refs.qDateProxy.hide()" />
-            </q-popup-proxy>
-          </q-icon>
-        </template>
-      </q-input>
-      <q-select  v-model="EmployeeInfo.resumeNatural.nativePlace" :options="areaType" emit-value map-options label="籍贯" />
-      <q-select  v-model="EmployeeInfo.resumeNatural.hukouPlace" :options="areaType" emit-value map-options label="户口所在地" />
-      <q-select  v-model="EmployeeInfo.resumeNatural.polity" :options="polityType" emit-value map-options label="政治面貌" />
-      <q-select  v-model="EmployeeInfo.resumeNatural.maritalStatus" :options="maritalType" emit-value map-options label="婚姻状况" />
-      <q-input  type="number" v-model.number="EmployeeInfo.resumeNatural.height" label="身高(cm)" />
-      <q-input  type="number" v-model.number="EmployeeInfo.resumeNatural.weight" label="体重(kg)" />
-      <q-input  readonly  v-model="EmployeeInfo.resumeCommunication.tel" label="电话" />
-      <q-input  readonly  v-model="EmployeeInfo.resumeCommunication.email" label="邮箱" />
-      <q-input  readonly  v-model="EmployeeInfo.resumeNatural.currentPlace" label="通讯地址" />
+      <div v-for="(item, index) in EmployeeInfo.resumeSchoolActivities" :key="index">
+        <span class="text-h6">社会活动 {{ (index+1) | noFilter }}</span>
+        <q-separator blue/>
+        <q-input v-model="item.name" label="活动名称" lazy-rules :rules="[val => !!val || '必填']"/>
+        <q-input clearable v-model="item.beginDate" label="开始日期(年-月)*" mask="####-##"
+                 lazy-rules :rules="[val => !!val || '必填']" />
+        <q-input clearable v-model="item.endDate" label="结束日期(年-月)*" mask="####-##"
+                 lazy-rules :rules="[val => !!val || '必填']" />
+        <q-input v-model="item.schoolName" label="所在单位" lazy-rules :rules="[val => !!val || '必填']"/>
+        <q-input v-model="item.remark" label="职务和成果" lazy-rules :rules="[val => !!val || '必填']"/>
+      </div>
       <div>
-        <q-btn label="提交" @click="onSave"  color="primary"/>
-        <q-btn label="保存" type="submit"  color="primary" flat class="q-ml-sm" />
+        <q-btn-group push>
+          <q-btn push label="增" icon="+" @click="increase"/>
+          <q-btn push label="减" icon="-" @click="decrease"/>
+        </q-btn-group>
+      </div>
+      <div>
+        <q-btn label="保存" type="submit"  color="primary"/>
         <q-btn label="返回" @click="onBack" color="primary" flat class="q-ml-sm" />
       </div>
     </q-form>
@@ -44,10 +38,10 @@
 </template>
 
 <script>
-import { cardType, areaType, genderType, polityType, maritalType } from '../constant/index'
+import { NoType } from '../constant/index'
 
 export default {
-  name: 'natural',
+  name: 'schoolactivities',
   mounted () {
     if (this.$route.params.EmployeeInfo) {
       this.EmployeeInfo = this.$route.params.EmployeeInfo
@@ -82,13 +76,53 @@ export default {
           email: '1@2',
           id: 52,
           modifiedTime: '2019-06-05',
-          tel: '13222222222' }
+          tel: '13222222222' },
+        resumeSchoolActivities: [{ beginDate: '2015-01',
+          cardNo: '411102199009160075',
+          createdTime: '2019-06-05',
+          endDate: '2015-01',
+          id: 19960,
+          modifiedTime: '2019-06-05',
+          name: '1',
+          remark: '1',
+          schoolName: '1' }, {
+          beginDate: '2019-01',
+          cardNo: '411102199009160075',
+          createdTime: '2019-06-05',
+          endDate: '2019-01',
+          id: 19961,
+          modifiedTime: '2019-06-05',
+          name: '55',
+          remark: '5555',
+          schoolName: '555' }, {
+          beginDate: '2019-01',
+          cardNo: '411102199009160075',
+          createdTime: '2019-06-05',
+          endDate: '2019-01',
+          id: 19962,
+          modifiedTime: '2019-06-05',
+          name: '111',
+          remark: '1',
+          schoolName: '1' }]
       },
-      cardType,
-      areaType,
-      genderType,
-      polityType,
-      maritalType
+      query: { beginDate: '2015-01',
+        cardNo: '411102199009160075',
+        createdTime: '2019-06-05',
+        endDate: '2015-01',
+        id: 19960,
+        modifiedTime: '2019-06-05',
+        name: '1',
+        remark: '1',
+        schoolName: '1' }
+    }
+  },
+  filters: {
+    noFilter (value) {
+      let num = ''
+      NoType.forEach((item, index) => {
+        if (item.value === value) { num = item.label }
+      })
+      return num
     }
   },
   methods: {
@@ -119,12 +153,13 @@ export default {
         path: '/'
       })
     },
-    onSave () {
-      console.log('save')
-      this.onSubmit()
-      this.$router.push({
-        path: '/'
-      })
+    increase () {
+      this.EmployeeInfo.resumeSchoolActivities = this.EmployeeInfo.resumeSchoolActivities.concat(this.query)
+    },
+    decrease () {
+      if (this.EmployeeInfo.resumeSchoolActivities.length > 1) {
+        this.EmployeeInfo.resumeSchoolActivities = this.EmployeeInfo.resumeSchoolActivities.slice(0, -1)
+      }
     }
   }
 }

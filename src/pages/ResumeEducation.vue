@@ -10,44 +10,44 @@
       autocomplete="off"
       spellcheck="false"
     >
-      <q-input filled readonly  v-model="EmployeeInfo.resumeNatural.name" label="姓名" />
-      <q-select filled v-model="EmployeeInfo.resumeNatural.cardType" :options="cardType" emit-value map-options label="证件类型" />
-      <q-input filled readonly  v-model="EmployeeInfo.resumeNatural.cardNo" label="证件号码" />
-      <q-select  v-model="EmployeeInfo.resumeNatural.sex" :options="genderType" emit-value map-options label="性别" />
-      <q-input  v-model="EmployeeInfo.resumeNatural.birthDate" mask="date" :rules="['date']" label="出生日期">
-        <template v-slot:append>
-          <q-icon name="event" class="cursor-pointer">
-            <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
-              <q-date v-model="EmployeeInfo.resumeNatural.birthDate" @input="() => $refs.qDateProxy.hide()" />
-            </q-popup-proxy>
-          </q-icon>
-        </template>
-      </q-input>
-      <q-select  v-model="EmployeeInfo.resumeNatural.nativePlace" :options="areaType" emit-value map-options label="籍贯" />
-      <q-select  v-model="EmployeeInfo.resumeNatural.hukouPlace" :options="areaType" emit-value map-options label="户口所在地" />
-      <q-select  v-model="EmployeeInfo.resumeNatural.polity" :options="polityType" emit-value map-options label="政治面貌" />
-      <q-select  v-model="EmployeeInfo.resumeNatural.maritalStatus" :options="maritalType" emit-value map-options label="婚姻状况" />
-      <q-input  type="number" v-model.number="EmployeeInfo.resumeNatural.height" label="身高(cm)" />
-      <q-input  type="number" v-model.number="EmployeeInfo.resumeNatural.weight" label="体重(kg)" />
-      <q-input  readonly  v-model="EmployeeInfo.resumeCommunication.tel" label="电话" />
-      <q-input  readonly  v-model="EmployeeInfo.resumeCommunication.email" label="邮箱" />
-      <q-input  readonly  v-model="EmployeeInfo.resumeNatural.currentPlace" label="通讯地址" />
+      <div v-for="(item, index) in EmployeeInfo.resumeEducation" :key="index">
+        <span class="text-h6">教育经历 {{(index+1) | noFilter }}</span>
+        <q-separator blue/>
+        <q-input ref="beginDate" clearable v-model="item.beginDate" label="开始日期(年-月)*" mask="####-##"
+                 lazy-rules :rules="[val => !!val || '必填']" />
+        <q-input ref="endDate" clearable v-model="item.endDate" label="毕业日期(年-月)*" mask="####-##"
+                 lazy-rules :rules="[val => !!val || '必填']" />
+        <q-input ref="schoolName" clearable v-model="item.schoolName" label="学校名称" lazy-rules :rules="[val => !!val || '必填']"/>
+        <q-input ref="collegeName" clearable v-model="item.collegeName" label="所在院系" lazy-rules :rules="[val => !!val || '必填']"/>
+        <q-input ref="specialtyName" clearable v-model="item.specialtyName" label="所学专业" lazy-rules :rules="[val => !!val || '必填']"/>
+        <q-select ref="studyStyle" v-model="item.studyStyle" :options="studyStyle" emit-value map-options label="学习方式" :rules="[val => !!val || '必填']"/>
+        <q-select ref="specialClass" v-model="item.specialClass" :options="SpecialType" emit-value map-options label="专业类别" :rules="[val => !!val || '必填']"/>
+        <q-select ref="certificateLevel" v-model="item.certificateLevel" :options="cerType" emit-value map-options label="学历" :rules="[val => !!val || '必填']"/>
+        <q-select ref="degree" v-model="item.degree" :options="degreeType" emit-value map-options label="学位" :rules="[val => !!val || '必填']"/>
+        <q-select ref="isOverseasStudy" v-model="item.isOverseasStudy" :options="whetherType" emit-value map-options label="是否海外留学" :rules="[val => !!val || '必填']"/>
+        <q-select ref="isHighestDegree" v-model="item.isHighestDegree" :options="whetherType" emit-value map-options label="是否最高学历" :rules="[val => !!val || '必填']"/>
+      </div>
       <div>
-        <q-btn label="提交" @click="onSave"  color="primary"/>
-        <q-btn label="保存" type="submit"  color="primary" flat class="q-ml-sm" />
+        <q-btn-group push>
+          <q-btn push label="增" icon="+" @click="increase"/>
+          <q-btn push label="减" icon="-" @click="decrease"/>
+        </q-btn-group>
+      </div>
+      <div>
+        <q-btn label="保存" type="submit"  color="primary"/>
+        <!--<q-btn label="保存" type="submit"  color="primary" flat class="q-ml-sm" />-->
         <q-btn label="返回" @click="onBack" color="primary" flat class="q-ml-sm" />
       </div>
     </q-form>
   </div>
 </div>
-
 </template>
 
 <script>
-import { cardType, areaType, genderType, polityType, maritalType } from '../constant/index'
+import { studyStyle, SpecialType, cerType, degreeType, whetherType, NoType } from '../constant/index'
 
 export default {
-  name: 'natural',
+  name: 'education',
   mounted () {
     if (this.$route.params.EmployeeInfo) {
       this.EmployeeInfo = this.$route.params.EmployeeInfo
@@ -82,18 +82,96 @@ export default {
           email: '1@2',
           id: 52,
           modifiedTime: '2019-06-05',
-          tel: '13222222222' }
+          tel: '13222222222' },
+        resumeEducation: [{ beginDate: '2011-02',
+          cardNo: '411102199009160075',
+          certificateLevel: '12',
+          collegeName: '机械',
+          createdTime: '2019-06-05',
+          degree: '2',
+          degreeSecond: '4',
+          endDate: '2013-03',
+          id: 66013,
+          isHighestDegree: '0',
+          isOverseasStudy: '0',
+          modifiedTime: '2019-06-05',
+          schoolName: '贝壳',
+          specialClass: '8',
+          specialClassSecond: '2',
+          specialtyName: '工程',
+          studyStyle: '1' }, { beginDate: '2011-02',
+          cardNo: '411102199009160075',
+          certificateLevel: '12',
+          collegeName: '机械',
+          createdTime: '2019-06-05',
+          degree: '2',
+          degreeSecond: '4',
+          endDate: '2013-03',
+          id: 66013,
+          isHighestDegree: '0',
+          isOverseasStudy: '0',
+          modifiedTime: '2019-06-05',
+          schoolName: '贝壳',
+          specialClass: '8',
+          specialClassSecond: '2',
+          specialtyName: '工程',
+          studyStyle: '1' }]
       },
-      cardType,
-      areaType,
-      genderType,
-      polityType,
-      maritalType
+      query: { beginDate: '',
+        cardNo: '411102199009160075',
+        certificateLevel: '',
+        collegeName: '',
+        createdTime: '2019-06-05',
+        degree: '',
+        degreeSecond: '',
+        endDate: '',
+        id: 66013,
+        isHighestDegree: '',
+        isOverseasStudy: '',
+        modifiedTime: '',
+        schoolName: '',
+        specialClass: '',
+        specialClassSecond: '',
+        specialtyName: '',
+        studyStyle: '' },
+      studyStyle,
+      SpecialType,
+      cerType,
+      degreeType,
+      whetherType,
+      Array: ['1', '2', '3', '4', '5']
+    }
+  },
+  filters: {
+    noFilter (value) {
+      let num = ''
+      NoType.forEach((item, index) => {
+        if (item.value === value) { num = item.label }
+      })
+      return num
     }
   },
   methods: {
     onSubmit () {
       console.log(this.EmployeeInfo.resumeNatural)
+      // this.$refs.beginDate.validate()
+      // this.$refs.endDate.validate()
+      // this.$refs.schoolName.validate()
+      // this.$refs.collegeName.validate()
+      // this.$refs.specialtyName.validate()
+      // this.$refs.studyStyle.validate()
+      // this.$refs.specialClass.validate()
+      // this.$refs.certificateLevel.validate()
+      // this.$refs.degree.validate()
+      // this.$refs.isOverseasStudy.validate()
+      // this.$refs.isHighestDegree.validate()
+      // if (this.$refs.beginDate.hasError || this.$refs.endDate.hasError || this.$refs.schoolName.hasError || this.$refs.collegeName.hasError || this.$refs.specialtyName.hasError ||
+      //   this.$refs.studyStyle.hasError || this.$refs.specialClass.hasError || this.$refs.certificateLevel.hasError || this.$refs.degree.hasError || this.$refs.isOverseasStudy.hasError || this.$refs.isHighestDegree.hasError) {
+      //   this.formHasError = true
+      //   this.hasError = this.formHasError
+      // } else {
+      //   this.hasError = false
+      // }
       // if (this.accept !== true) {
       //   this.$q.notify({
       //     color: 'red-5',
@@ -119,12 +197,20 @@ export default {
         path: '/'
       })
     },
-    onSave () {
-      console.log('save')
-      this.onSubmit()
-      this.$router.push({
-        path: '/'
-      })
+    // onSave () {
+    //   console.log('save')
+    //   this.onSubmit()
+    //   this.$router.push({
+    //     path: '/'
+    //   })
+    // },
+    increase () {
+      this.EmployeeInfo.resumeEducation = this.EmployeeInfo.resumeEducation.concat(this.query)
+    },
+    decrease () {
+      if (this.EmployeeInfo.resumeEducation.length > 1) {
+        this.EmployeeInfo.resumeEducation = this.EmployeeInfo.resumeEducation.slice(0, -1)
+      }
     }
   }
 }

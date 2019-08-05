@@ -10,31 +10,23 @@
       autocomplete="off"
       spellcheck="false"
     >
-      <q-input filled readonly  v-model="EmployeeInfo.resumeNatural.name" label="姓名" />
-      <q-select filled v-model="EmployeeInfo.resumeNatural.cardType" :options="cardType" emit-value map-options label="证件类型" />
-      <q-input filled readonly  v-model="EmployeeInfo.resumeNatural.cardNo" label="证件号码" />
-      <q-select  v-model="EmployeeInfo.resumeNatural.sex" :options="genderType" emit-value map-options label="性别" />
-      <q-input  v-model="EmployeeInfo.resumeNatural.birthDate" mask="date" :rules="['date']" label="出生日期">
-        <template v-slot:append>
-          <q-icon name="event" class="cursor-pointer">
-            <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
-              <q-date v-model="EmployeeInfo.resumeNatural.birthDate" @input="() => $refs.qDateProxy.hide()" />
-            </q-popup-proxy>
-          </q-icon>
-        </template>
-      </q-input>
-      <q-select  v-model="EmployeeInfo.resumeNatural.nativePlace" :options="areaType" emit-value map-options label="籍贯" />
-      <q-select  v-model="EmployeeInfo.resumeNatural.hukouPlace" :options="areaType" emit-value map-options label="户口所在地" />
-      <q-select  v-model="EmployeeInfo.resumeNatural.polity" :options="polityType" emit-value map-options label="政治面貌" />
-      <q-select  v-model="EmployeeInfo.resumeNatural.maritalStatus" :options="maritalType" emit-value map-options label="婚姻状况" />
-      <q-input  type="number" v-model.number="EmployeeInfo.resumeNatural.height" label="身高(cm)" />
-      <q-input  type="number" v-model.number="EmployeeInfo.resumeNatural.weight" label="体重(kg)" />
-      <q-input  readonly  v-model="EmployeeInfo.resumeCommunication.tel" label="电话" />
-      <q-input  readonly  v-model="EmployeeInfo.resumeCommunication.email" label="邮箱" />
-      <q-input  readonly  v-model="EmployeeInfo.resumeNatural.currentPlace" label="通讯地址" />
+      <div v-for="(item, index) in EmployeeInfo.resumeQualification" :key="index">
+        <span class="text-h6">资格证书 {{ (index+1) | noFilter }}</span>
+        <q-separator blue/>
+        <q-input clearable v-model="item.getDate" label="获得日期(年-月)*" mask="####-##"
+                 lazy-rules :rules="[val => !!val || '必填']" />
+        <q-input v-model="item.qualificationName" label="证书名称" lazy-rules :rules="[val => !!val || '必填']"/>
+        <q-input v-model="item.qualificationNo" label="证书编号" lazy-rules :rules="[val => !!val || '必填']"/>
+        <q-input v-model="item.qualificationOrg" label="颁发机构" lazy-rules :rules="[val => !!val || '必填']"/>
+      </div>
       <div>
-        <q-btn label="提交" @click="onSave"  color="primary"/>
-        <q-btn label="保存" type="submit"  color="primary" flat class="q-ml-sm" />
+        <q-btn-group push>
+          <q-btn push label="增" icon="+" @click="increase"/>
+          <q-btn push label="减" icon="-" @click="decrease"/>
+        </q-btn-group>
+      </div>
+      <div>
+        <q-btn label="保存" type="submit"  color="primary"/>
         <q-btn label="返回" @click="onBack" color="primary" flat class="q-ml-sm" />
       </div>
     </q-form>
@@ -44,10 +36,10 @@
 </template>
 
 <script>
-import { cardType, areaType, genderType, polityType, maritalType } from '../constant/index'
+import { NoType } from '../constant/index'
 
 export default {
-  name: 'natural',
+  name: 'qualification',
   mounted () {
     if (this.$route.params.EmployeeInfo) {
       this.EmployeeInfo = this.$route.params.EmployeeInfo
@@ -82,13 +74,35 @@ export default {
           email: '1@2',
           id: 52,
           modifiedTime: '2019-06-05',
-          tel: '13222222222' }
+          tel: '13222222222' },
+        resumeQualification: [{ cardNo: '411102199009160075',
+          createdTime: '2019-06-05',
+          getDate: '2019-01',
+          id: 42654,
+          modifiedTime: '2019-06-05',
+          qualificationLevel: 'CODE_Other',
+          qualificationName: '1',
+          qualificationNo: '2',
+          qualificationOrg: '3' }]
       },
-      cardType,
-      areaType,
-      genderType,
-      polityType,
-      maritalType
+      query: { cardNo: '411102199009160075',
+        createdTime: '2019-06-05',
+        getDate: '2019-01',
+        id: 42654,
+        modifiedTime: '2019-06-05',
+        qualificationLevel: 'CODE_Other',
+        qualificationName: '1',
+        qualificationNo: '2',
+        qualificationOrg: '3' }
+    }
+  },
+  filters: {
+    noFilter (value) {
+      let num = ''
+      NoType.forEach((item, index) => {
+        if (item.value === value) { num = item.label }
+      })
+      return num
     }
   },
   methods: {
@@ -119,12 +133,13 @@ export default {
         path: '/'
       })
     },
-    onSave () {
-      console.log('save')
-      this.onSubmit()
-      this.$router.push({
-        path: '/'
-      })
+    increase () {
+      this.EmployeeInfo.resumeQualification = this.EmployeeInfo.resumeQualification.concat(this.query)
+    },
+    decrease () {
+      if (this.EmployeeInfo.resumeQualification.length > 1) {
+        this.EmployeeInfo.resumeQualification = this.EmployeeInfo.resumeQualification.slice(0, -1)
+      }
     }
   }
 }

@@ -1,7 +1,7 @@
 
 const routes = [
   {
-    path: '/',
+    path: '/quasarResume',
     // name: 'home',
     component: () => import('layouts/MyLayout.vue'),
     children: [
@@ -17,7 +17,8 @@ const routes = [
       { path: 'schoolActivities', name: 'schoolActivities', component: () => import('pages/ResumeSchoolActivities.vue') },
       { path: 'otherInfo', name: 'otherInfo', component: () => import('pages/ResumeOtherInfo.vue') }
     ]
-  }
+  },
+  { path: '/', redirect: '/quasarResume' }
 ]
 
 // Always leave this as last one
