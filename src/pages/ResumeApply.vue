@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import { axiosInstance } from '../boot/axios'
+
 export default {
   name: 'apply',
   mounted () {
@@ -71,7 +73,10 @@ export default {
       // }
     },
     getWebData () {
-      return this.EmployeeInfo
+      axiosInstance.get('/resumeInfo', {
+      }).then(res => {
+        this.EmployeeInfo = res.data.data
+      })
     },
     onBack () {
       console.log('back')

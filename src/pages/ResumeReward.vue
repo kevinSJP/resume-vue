@@ -38,6 +38,7 @@
 
 <script>
 import { awardType, NoType } from '../constant/index'
+import { axiosInstance } from '../boot/axios'
 
 export default {
   name: 'reward',
@@ -127,7 +128,10 @@ export default {
       // }
     },
     getWebData () {
-      return this.EmployeeInfo
+      axiosInstance.get('/resumeInfo', {
+      }).then(res => {
+        this.EmployeeInfo = res.data.data
+      })
     },
     onBack () {
       console.log('back')

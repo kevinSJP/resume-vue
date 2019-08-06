@@ -40,6 +40,7 @@
 
 <script>
 import { NoType } from '../constant/index'
+import { axiosInstance } from '../boot/axios'
 
 export default {
   name: 'project',
@@ -143,7 +144,10 @@ export default {
       // }
     },
     getWebData () {
-      return this.EmployeeInfo
+      axiosInstance.get('/resumeInfo', {
+      }).then(res => {
+        this.EmployeeInfo = res.data.data
+      })
     },
     onBack () {
       console.log('back')

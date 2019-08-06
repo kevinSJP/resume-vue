@@ -239,9 +239,13 @@
 <script>
 
 import { whetherType, cardType, genderType, polityType, maritalType, areaType, cerType, familyType, awardType } from '../constant/index'
-
+import { axiosInstance } from '../boot/axios'
+/*, axiosInstance, postRequest, putRequest, deleteRequest, uploadFileRequest */
 export default {
   name: 'resume',
+  created () {
+    this.getWebData()
+  },
   mounted () {
     // this.getWebData()
   },
@@ -566,6 +570,12 @@ export default {
         params: {
           EmployeeInfo: this.EmployeeInfo
         }
+      })
+    },
+    getWebData () {
+      axiosInstance.get('/resumeInfo', {
+      }).then(res => {
+        this.EmployeeInfo = res.data.data
       })
     }
   }

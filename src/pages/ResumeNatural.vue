@@ -46,6 +46,7 @@
 
 <script>
 import { cardType, areaType, genderType, polityType, maritalType } from '../constant/index'
+import { axiosInstance } from '../boot/axios'
 
 export default {
   name: 'natural',
@@ -148,7 +149,10 @@ export default {
       // }
     },
     getWebData () {
-      return this.EmployeeInfo
+      axiosInstance.get('/resumeInfo', {
+      }).then(res => {
+        this.EmployeeInfo = res.data.data
+      })
     },
     onBack () {
       console.log('back')
