@@ -95,6 +95,7 @@ export default {
         polity: '13',
         relationship: '11',
         tel: '12313' },
+      putInfo: {},
       familyType,
       polityType
     }
@@ -110,6 +111,7 @@ export default {
   },
   methods: {
     onSubmit () {
+      this.modifyEmployeeInfo()
       axiosInstance.put('/resumeInfo', this.EmployeeInfo)
         .then(res => { return res })
         .catch((err) => { return err })
@@ -133,6 +135,61 @@ export default {
       if (this.EmployeeInfo.resumeFamily.length > 1) {
         this.EmployeeInfo.resumeFamily = this.EmployeeInfo.resumeFamily.slice(0, -1)
       }
+    },
+    modifyEmployeeInfo () {
+      this.putInfo = this.EmployeeInfo
+      this.$delete(this.putInfo, 'id')
+      this.$delete(this.putInfo, 'createdTime')
+      this.$delete(this.putInfo, 'modifiedTime')
+      this.$delete(this.putInfo.resumeNatural, 'id')
+      this.$delete(this.putInfo.resumeNatural, 'createdTime')
+      this.$delete(this.putInfo.resumeNatural, 'modifiedTime')
+      this.$delete(this.putInfo.resumeOtherInfo, 'id')
+      this.$delete(this.putInfo.resumeOtherInfo, 'createdTime')
+      this.$delete(this.putInfo.resumeOtherInfo, 'modifiedTime')
+      this.$delete(this.putInfo.resumeCommunication, 'id')
+      this.$delete(this.putInfo.resumeCommunication, 'createdTime')
+      this.$delete(this.putInfo.resumeCommunication, 'modifiedTime')
+      this.putInfo.resumeEducation.forEach(v => {
+        this.$delete(v, 'id')
+        this.$delete(v, 'createdTime')
+        this.$delete(v, 'modifiedTime')
+      })
+      this.putInfo.resumeFamily.forEach(v => {
+        this.$delete(v, 'id')
+        this.$delete(v, 'createdTime')
+        this.$delete(v, 'modifiedTime')
+      })
+      this.putInfo.resumeInternship.forEach(v => {
+        this.$delete(v, 'id')
+        this.$delete(v, 'createdTime')
+        this.$delete(v, 'modifiedTime')
+      })
+      this.putInfo.resumeLanguage.forEach(v => {
+        this.$delete(v, 'id')
+        this.$delete(v, 'createdTime')
+        this.$delete(v, 'modifiedTime')
+      })
+      this.putInfo.resumeProject.forEach(v => {
+        this.$delete(v, 'id')
+        this.$delete(v, 'createdTime')
+        this.$delete(v, 'modifiedTime')
+      })
+      this.putInfo.resumeQualification.forEach(v => {
+        this.$delete(v, 'id')
+        this.$delete(v, 'createdTime')
+        this.$delete(v, 'modifiedTime')
+      })
+      this.putInfo.resumeReward.forEach(v => {
+        this.$delete(v, 'id')
+        this.$delete(v, 'createdTime')
+        this.$delete(v, 'modifiedTime')
+      })
+      this.putInfo.resumeSchoolActivities.forEach(v => {
+        this.$delete(v, 'id')
+        this.$delete(v, 'createdTime')
+        this.$delete(v, 'modifiedTime')
+      })
     }
   }
 }
