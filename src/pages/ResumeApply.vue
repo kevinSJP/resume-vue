@@ -25,13 +25,13 @@
 
 <script>
 import { axiosInstance } from '../boot/axios'
+import { modifyEmployeeInfo } from '../common/index'
 
 export default {
   name: 'apply',
   mounted () {
     if (this.$route.params.EmployeeInfo) {
       this.EmployeeInfo = this.$route.params.EmployeeInfo
-      // console.log(this.$route.params.jobApply)
     } else {
       this.getWebData()
     }
@@ -42,13 +42,11 @@ export default {
         jobApply: '信息化',
         jobApply2: '信息化'
       },
-      putInfo: {},
       hasError: ''
     }
   },
   methods: {
     onSubmit () {
-      console.log(this.EmployeeInfo.jobApply)
       this.$refs.jobApply.validate()
       this.$refs.jobApply2.validate()
       if (this.$refs.jobApply.hasError || this.$refs.jobApply2.hasError) {
@@ -57,8 +55,7 @@ export default {
       } else {
         this.hasError = false
       }
-      this.modifyEmployeeInfo()
-      axiosInstance.put('/resumeInfo', this.EmployeeInfo)
+      axiosInstance.put('/resumeInfo', modifyEmployeeInfo(this.EmployeeInfo))
         .then(res => { return res })
         .catch((err) => { return err })
       // if (this.accept !== true) {
@@ -98,61 +95,6 @@ export default {
           path: '/'
         })
       }
-    },
-    modifyEmployeeInfo () {
-      this.putInfo = this.EmployeeInfo
-      this.$delete(this.putInfo, 'id')
-      this.$delete(this.putInfo, 'createdTime')
-      this.$delete(this.putInfo, 'modifiedTime')
-      this.$delete(this.putInfo.resumeNatural, 'id')
-      this.$delete(this.putInfo.resumeNatural, 'createdTime')
-      this.$delete(this.putInfo.resumeNatural, 'modifiedTime')
-      this.$delete(this.putInfo.resumeOtherInfo, 'id')
-      this.$delete(this.putInfo.resumeOtherInfo, 'createdTime')
-      this.$delete(this.putInfo.resumeOtherInfo, 'modifiedTime')
-      this.$delete(this.putInfo.resumeCommunication, 'id')
-      this.$delete(this.putInfo.resumeCommunication, 'createdTime')
-      this.$delete(this.putInfo.resumeCommunication, 'modifiedTime')
-      this.putInfo.resumeEducation.forEach(v => {
-        this.$delete(v, 'id')
-        this.$delete(v, 'createdTime')
-        this.$delete(v, 'modifiedTime')
-      })
-      this.putInfo.resumeFamily.forEach(v => {
-        this.$delete(v, 'id')
-        this.$delete(v, 'createdTime')
-        this.$delete(v, 'modifiedTime')
-      })
-      this.putInfo.resumeInternship.forEach(v => {
-        this.$delete(v, 'id')
-        this.$delete(v, 'createdTime')
-        this.$delete(v, 'modifiedTime')
-      })
-      this.putInfo.resumeLanguage.forEach(v => {
-        this.$delete(v, 'id')
-        this.$delete(v, 'createdTime')
-        this.$delete(v, 'modifiedTime')
-      })
-      this.putInfo.resumeProject.forEach(v => {
-        this.$delete(v, 'id')
-        this.$delete(v, 'createdTime')
-        this.$delete(v, 'modifiedTime')
-      })
-      this.putInfo.resumeQualification.forEach(v => {
-        this.$delete(v, 'id')
-        this.$delete(v, 'createdTime')
-        this.$delete(v, 'modifiedTime')
-      })
-      this.putInfo.resumeReward.forEach(v => {
-        this.$delete(v, 'id')
-        this.$delete(v, 'createdTime')
-        this.$delete(v, 'modifiedTime')
-      })
-      this.putInfo.resumeSchoolActivities.forEach(v => {
-        this.$delete(v, 'id')
-        this.$delete(v, 'createdTime')
-        this.$delete(v, 'modifiedTime')
-      })
     }
   }
 }
