@@ -84,13 +84,10 @@ export default {
           birthDate: '1990-07-09',
           cardNo: '411102199009160075',
           cardType: '1',
-          createdTime: '2018-10-14',
           currentPlace: '1',
           height: '175',
           hukouPlace: '110000',
-          id: 78,
           maritalStatus: '1',
-          modifiedTime: '2019-06-05',
           name: '邵金鹏',
           nativePlace: '110000',
           photoId: '411102199009160075',
@@ -101,8 +98,6 @@ export default {
           cardNo: '411102199009160075',
           createdTime: '2018-10-14',
           email: '1@2',
-          id: 52,
-          modifiedTime: '2019-06-05',
           tel: '13222222222' }
       },
       cardType,
@@ -132,27 +127,18 @@ export default {
       } else {
         this.hasError = false
       }
-      // if (this.accept !== true) {
-      //   this.$q.notify({
-      //     color: 'red-5',
-      //     textColor: 'white',
-      //     icon: 'fas fa-exclamation-triangle',
-      //     message: 'You need to accept the license and terms first'
-      //   })
-      // } else {
-      //   this.$q.notify({
-      //     color: 'green-4',
-      //     textColor: 'white',
-      //     icon: 'fas fa-check-circle',
-      //     message: 'Submitted'
-      //   })
-      // }
+      axiosInstance.put('/resumeInfo', this.EmployeeInfo)
+        .then(res => {
+          console.log(res)
+          return res
+        })
+        .catch((err) => { return err })
     },
     getWebData () {
       axiosInstance.get('/resumeInfo', {
       }).then(res => {
         this.EmployeeInfo = res.data.data
-      })
+      }).catch((err) => { return err })
     },
     onBack () {
       console.log('back')

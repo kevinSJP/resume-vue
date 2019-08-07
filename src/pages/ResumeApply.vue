@@ -56,6 +56,9 @@ export default {
       } else {
         this.hasError = false
       }
+      axiosInstance.put('/resumeInfo', this.EmployeeInfo)
+        .then(res => { return res })
+        .catch((err) => { return err })
       // if (this.accept !== true) {
       //   this.$q.notify({
       //     color: 'red-5',
@@ -76,7 +79,7 @@ export default {
       axiosInstance.get('/resumeInfo', {
       }).then(res => {
         this.EmployeeInfo = res.data.data
-      })
+      }).catch((err) => { return err })
     },
     onBack () {
       console.log('back')

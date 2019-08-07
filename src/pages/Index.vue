@@ -482,6 +482,7 @@ export default {
     }
   },
   methods: {
+    /* **** 页面跳转 ****/
     goNatural () {
       this.$router.push({
         path: '/natural',
@@ -572,11 +573,13 @@ export default {
         }
       })
     },
+    /* *****获取数据*******/
     getWebData () {
       axiosInstance.get('/resumeInfo', {
       }).then(res => {
         this.EmployeeInfo = res.data.data
-      })
+        console.log(this.EmployeeInfo)
+      }).catch((err) => { return err })
     }
   }
 }

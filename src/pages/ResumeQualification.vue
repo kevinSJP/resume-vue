@@ -108,28 +108,15 @@ export default {
   },
   methods: {
     onSubmit () {
-      console.log(this.EmployeeInfo.resumeNatural)
-      // if (this.accept !== true) {
-      //   this.$q.notify({
-      //     color: 'red-5',
-      //     textColor: 'white',
-      //     icon: 'fas fa-exclamation-triangle',
-      //     message: 'You need to accept the license and terms first'
-      //   })
-      // } else {
-      //   this.$q.notify({
-      //     color: 'green-4',
-      //     textColor: 'white',
-      //     icon: 'fas fa-check-circle',
-      //     message: 'Submitted'
-      //   })
-      // }
+      axiosInstance.put('/resumeInfo', this.EmployeeInfo)
+        .then(res => { return res })
+        .catch((err) => { return err })
     },
     getWebData () {
       axiosInstance.get('/resumeInfo', {
       }).then(res => {
         this.EmployeeInfo = res.data.data
-      })
+      }).catch((err) => { return err })
     },
     onBack () {
       console.log('back')
