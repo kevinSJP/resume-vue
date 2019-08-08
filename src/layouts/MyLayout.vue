@@ -16,7 +16,12 @@
           个人简历
         </q-toolbar-title>
 
-        <div>v{{ $q.version }}</div>
+        <q-btn round>
+          <q-avatar size="42px">
+            <img src="https://cdn.quasar.dev/img/avatar2.jpg">
+          </q-avatar>
+        </q-btn>
+        <!--<div>v{{ $q.version }}</div>-->
       </q-toolbar>
     </q-header>
 

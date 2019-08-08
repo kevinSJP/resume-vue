@@ -12,6 +12,20 @@
     >
       <q-input ref="jobApply" clearable  v-model="EmployeeInfo.jobApply" label="期望职位*" lazy-rules :rules="[val => !!val || '必填']" />
       <q-input ref="jobApply2" clearable  v-model="EmployeeInfo.jobApply2" label="求职意向*" lazy-rules :rules="[val => !!val || '必填']" />
+      <q-uploader
+        url="http://localhost:4444/upload"
+        label="上传照片 "
+        auto-upload
+        accept=".jpg, image/jpeg"
+        style="max-width: 300px"
+      />
+        <q-uploader
+          url="http://localhost:4444/upload"
+          label="上传简历 ( <2k size)"
+          auto-upload
+          :max-file-size="2048"
+          style="max-width: 300px"
+        />
       <div>
         <q-btn label="提交" @click="onSave"  color="primary"/>
         <q-btn label="保存" type="submit"  color="primary" flat class="q-ml-sm" />
