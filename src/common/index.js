@@ -12,45 +12,76 @@ export const modifyEmployeeInfo = (value) => {
   Vue.delete(value.resumeCommunication, 'id')
   Vue.delete(value.resumeCommunication, 'createdTime')
   Vue.delete(value.resumeCommunication, 'modifiedTime')
-  value.resumeEducation.forEach(v => {
-    Vue.delete(v, 'id')
-    Vue.delete(v, 'createdTime')
-    Vue.delete(v, 'modifiedTime')
-  })
-  value.resumeFamily.forEach(v => {
-    Vue.delete(v, 'id')
-    Vue.delete(v, 'createdTime')
-    Vue.delete(v, 'modifiedTime')
-  })
-  value.resumeInternship.forEach(v => {
-    Vue.delete(v, 'id')
-    Vue.delete(v, 'createdTime')
-    Vue.delete(v, 'modifiedTime')
-  })
-  value.resumeLanguage.forEach(v => {
-    Vue.delete(v, 'id')
-    Vue.delete(v, 'createdTime')
-    Vue.delete(v, 'modifiedTime')
-  })
-  value.resumeProject.forEach(v => {
-    Vue.delete(v, 'id')
-    Vue.delete(v, 'createdTime')
-    Vue.delete(v, 'modifiedTime')
-  })
-  value.resumeQualification.forEach(v => {
-    Vue.delete(v, 'id')
-    Vue.delete(v, 'createdTime')
-    Vue.delete(v, 'modifiedTime')
-  })
-  value.resumeReward.forEach(v => {
-    Vue.delete(v, 'id')
-    Vue.delete(v, 'createdTime')
-    Vue.delete(v, 'modifiedTime')
-  })
-  value.resumeSchoolActivities.forEach(v => {
-    Vue.delete(v, 'id')
-    Vue.delete(v, 'createdTime')
-    Vue.delete(v, 'modifiedTime')
-  })
+  if (!isEmptyObject(value.resumeEducation)) {
+    value.resumeEducation.forEach(v => {
+      Vue.delete(v, 'id')
+      Vue.delete(v, 'createdTime')
+      Vue.delete(v, 'modifiedTime')
+    })
+  }
+  if (!isEmptyObject(value.resumeFamily)) {
+    value.resumeFamily.forEach(v => {
+      Vue.delete(v, 'id')
+      Vue.delete(v, 'createdTime')
+      Vue.delete(v, 'modifiedTime')
+    })
+  }
+  if (!isEmptyObject(value.resumeInternship)) {
+    value.resumeInternship.forEach(v => {
+      Vue.delete(v, 'id')
+      Vue.delete(v, 'createdTime')
+      Vue.delete(v, 'modifiedTime')
+    })
+  }
+  if (!isEmptyObject(value.resumeLanguage)) {
+    value.resumeLanguage.forEach(v => {
+      Vue.delete(v, 'id')
+      Vue.delete(v, 'createdTime')
+      Vue.delete(v, 'modifiedTime')
+    })
+  }
+  if (!isEmptyObject(value.resumeProject)) {
+    value.resumeProject.forEach(v => {
+      Vue.delete(v, 'id')
+      Vue.delete(v, 'createdTime')
+      Vue.delete(v, 'modifiedTime')
+    })
+  }
+  if (!isEmptyObject(value.resumeQualification)) {
+    value.resumeQualification.forEach(v => {
+      Vue.delete(v, 'id')
+      Vue.delete(v, 'createdTime')
+      Vue.delete(v, 'modifiedTime')
+    })
+  }
+  if (!isEmptyObject(value.resumeReward)) {
+    value.resumeReward.forEach(v => {
+      Vue.delete(v, 'id')
+      Vue.delete(v, 'createdTime')
+      Vue.delete(v, 'modifiedTime')
+    })
+  }
+  if (!isEmptyObject(value.resumeSchoolActivities)) {
+    value.resumeSchoolActivities.forEach(v => {
+      Vue.delete(v, 'id')
+      Vue.delete(v, 'createdTime')
+      Vue.delete(v, 'modifiedTime')
+    })
+  }
+  // if (!isEmptyObject(value.resumeAttachment)) {
+  //   value.resumeAttachment.forEach(v => {
+  //     Vue.delete(v, 'id')
+  //     Vue.delete(v, 'createdTime')
+  //     Vue.delete(v, 'modifiedTime')
+  //   })
+  // }
   return value
+}
+
+function isEmptyObject (obj) {
+  var name
+  for (name in obj) {
+    return false
+  }
+  return true
 }

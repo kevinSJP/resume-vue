@@ -12,20 +12,21 @@
     >
       <q-input ref="jobApply" clearable  v-model="EmployeeInfo.jobApply" label="期望职位*" lazy-rules :rules="[val => !!val || '必填']" />
       <q-input ref="jobApply2" clearable  v-model="EmployeeInfo.jobApply2" label="求职意向*" lazy-rules :rules="[val => !!val || '必填']" />
-      <q-uploader
-        url="http://localhost:4444/upload"
-        label="上传照片 "
-        auto-upload
-        accept=".jpg, image/jpeg"
-        style="max-width: 300px"
-      />
-        <q-uploader
-          url="http://localhost:4444/upload"
-          label="上传简历 ( <2k size)"
-          auto-upload
-          :max-file-size="2048"
-          style="max-width: 300px"
-        />
+      <!--<q-uploader-->
+        <!--url="http://localhost:8083/file/upload/avatar"-->
+        <!--label="上传照片 "-->
+        <!--auto-upload-->
+        <!--accept=".jpg, image/jpeg"-->
+        <!--style="max-width: 300px"-->
+        <!--form-field= "() => [{ name: 'file', value: file[0] }]"-->
+      <!--/>-->
+      <!--<q-uploader-->
+        <!--url="http://localhost:8083/file/upload/attachment"-->
+        <!--label="上传简历 ( <2k size)"-->
+        <!--auto-upload-->
+        <!--:max-file-size="2048"-->
+        <!--style="max-width: 300px"-->
+      <!--/>-->
       <div>
         <q-btn label="提交" @click="onSave"  color="primary"/>
         <q-btn label="保存" type="submit"  color="primary" flat class="q-ml-sm" />
@@ -69,17 +70,18 @@ export default {
       } else {
         this.hasError = false
       }
+      console.log(modifyEmployeeInfo(this.EmployeeInfo))
       axiosInstance.put('/resumeInfo', modifyEmployeeInfo(this.EmployeeInfo))
-        .then(res => { return res })
-        .catch((err) => { return err })
-      // if (this.accept !== true) {
-      //   this.$q.notify({
-      //     color: 'red-5',
-      //     textColor: 'white',
-      //     icon: 'fas fa-exclamation-triangle',
-      //     message: 'You need to accept the license and terms first'
-      //   })
-      // } else {
+        .then(res => {
+          this.submitSucess()
+          return res
+        })
+        .catch((err) => {
+          this.submitFail()
+          return err
+        })
+      // if (this.accept !== true) {}
+      // else {
       //   this.$q.notify({
       //     color: 'green-4',
       //     textColor: 'white',
@@ -109,6 +111,22 @@ export default {
           path: '/'
         })
       }
+    },
+    submitSucess () {
+      // this.$q.notify({
+      //   color: 'red-5',
+      //   textColor: 'white',
+      //   icon: 'fas fa-exclamation-triangle',
+      //   message: '提交失败'
+      // })
+    },
+    submitFail () {
+      // this.$q.notify({
+      //   color: 'red-5',
+      //   textColor: 'white',
+      //   icon: 'fas fa-exclamation-triangle',
+      //   message: '提交失败'
+      // })
     }
   }
 }

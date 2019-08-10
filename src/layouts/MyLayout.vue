@@ -18,7 +18,7 @@
 
         <q-btn round>
           <q-avatar size="42px">
-            <img src="https://cdn.quasar.dev/img/avatar2.jpg">
+            <img src="https://imc.bii.com.cn/rect/file/download/avatar" :onerror="defaultImg">
           </q-avatar>
         </q-btn>
         <!--<div>v{{ $q.version }}</div>-->
@@ -148,6 +148,11 @@ export default {
   data () {
     return {
       leftDrawerOpen: this.$q.platform.is.desktop
+    }
+  },
+  computed: {
+    defaultImg () {
+      return 'this.src="' + require('../assets/default_avatar.jpeg') + '"'
     }
   },
   methods: {
