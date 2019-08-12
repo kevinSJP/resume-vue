@@ -40,7 +40,7 @@
 <script>
 import { NoType } from '../constant/index'
 import { axiosInstance } from '../boot/axios'
-import { modifyEmployeeInfo } from '../common/index'
+import { modifyEmployeeInfo, notiSuccess, notiFail } from '../common/index'
 
 export default {
   name: 'schoolactivities',
@@ -129,8 +129,14 @@ export default {
   methods: {
     onSubmit () {
       axiosInstance.put('/resumeInfo', modifyEmployeeInfo(this.EmployeeInfo))
-        .then(res => { return res })
-        .catch((err) => { return err })
+        .then(res => {
+          notiSuccess()
+          return res
+        })
+        .catch((err) => {
+          notiFail()
+          return err
+        })
     },
     getWebData () {
       axiosInstance.get('/resumeInfo', {

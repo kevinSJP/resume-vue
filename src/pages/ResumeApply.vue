@@ -28,8 +28,8 @@
         <!--style="max-width: 300px"-->
       <!--/>-->
       <div>
-        <q-btn label="提交" @click="onSave"  color="primary"/>
-        <q-btn label="保存" type="submit"  color="primary" flat class="q-ml-sm" />
+        <!--<q-btn label="提交" @click="onSave"  color="primary"/>-->
+        <q-btn label="保存" type="submit"  color="primary" />
         <q-btn label="返回" @click="onBack" color="primary" flat class="q-ml-sm" />
       </div>
     </q-form>
@@ -40,7 +40,7 @@
 
 <script>
 import { axiosInstance } from '../boot/axios'
-import { modifyEmployeeInfo } from '../common/index'
+import { modifyEmployeeInfo, notiSuccess, notiFail } from '../common/index'
 
 export default {
   name: 'apply',
@@ -60,6 +60,9 @@ export default {
       hasError: ''
     }
   },
+  watch: {
+
+  },
   methods: {
     onSubmit () {
       this.$refs.jobApply.validate()
@@ -73,22 +76,13 @@ export default {
       console.log(modifyEmployeeInfo(this.EmployeeInfo))
       axiosInstance.put('/resumeInfo', modifyEmployeeInfo(this.EmployeeInfo))
         .then(res => {
-          this.submitSucess()
+          notiSuccess()
           return res
         })
         .catch((err) => {
-          this.submitFail()
+          notiFail()
           return err
         })
-      // if (this.accept !== true) {}
-      // else {
-      //   this.$q.notify({
-      //     color: 'green-4',
-      //     textColor: 'white',
-      //     icon: 'fas fa-check-circle',
-      //     message: 'Submitted'
-      //   })
-      // }
     },
     getWebData () {
       axiosInstance.get('/resumeInfo', {
@@ -111,22 +105,6 @@ export default {
           path: '/'
         })
       }
-    },
-    submitSucess () {
-      // this.$q.notify({
-      //   color: 'red-5',
-      //   textColor: 'white',
-      //   icon: 'fas fa-exclamation-triangle',
-      //   message: '提交失败'
-      // })
-    },
-    submitFail () {
-      // this.$q.notify({
-      //   color: 'red-5',
-      //   textColor: 'white',
-      //   icon: 'fas fa-exclamation-triangle',
-      //   message: '提交失败'
-      // })
     }
   }
 }

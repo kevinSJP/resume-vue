@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import { Notify } from 'quasar'
 export const modifyEmployeeInfo = (value) => {
   Vue.delete(value, 'id')
   Vue.delete(value, 'createdTime')
@@ -84,4 +85,24 @@ function isEmptyObject (obj) {
     return false
   }
   return true
+}
+
+export const notiSuccess = () => {
+  Notify.create({
+    color: 'green-4',
+    textColor: 'white',
+    position: 'top',
+    icon: 'fas fa-check-circle',
+    message: '提交成功'
+  })
+}
+
+export const notiFail = () => {
+  Notify.create({
+    color: 'red-5',
+    textColor: 'white',
+    position: 'top',
+    icon: 'fas fa-exclamation-triangle',
+    message: '提交失败'
+  })
 }

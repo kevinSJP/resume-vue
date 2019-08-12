@@ -34,8 +34,8 @@
       <q-input ref="email" clearable v-model="EmployeeInfo.resumeCommunication.email" label="邮箱*"  lazy-rules :rules="[val => !!val || '必填']"/>
       <q-input ref="currentPlace" clearable v-model="EmployeeInfo.resumeNatural.currentPlace" label="通讯地址*"  lazy-rules :rules="[val => !!val || '必填']"/>
       <div>
-        <q-btn label="提交" @click="onSave"  color="primary"/>
-        <q-btn label="保存" type="submit"  color="primary" flat class="q-ml-sm" />
+        <!--<q-btn label="提交" @click="onSave"  color="primary"/>-->
+        <q-btn label="保存" type="submit"  color="primary" />
         <q-btn label="返回" @click="onBack" color="primary" flat class="q-ml-sm" />
       </div>
     </q-form>
@@ -47,7 +47,7 @@
 <script>
 import { cardType, areaType, genderType, polityType, maritalType } from '../constant/index'
 import { axiosInstance } from '../boot/axios'
-import { modifyEmployeeInfo } from '../common/index'
+import { modifyEmployeeInfo, notiSuccess, notiFail } from '../common/index'
 
 export default {
   name: 'natural',
@@ -138,10 +138,13 @@ export default {
       }
       axiosInstance.put('/resumeInfo', modifyEmployeeInfo(this.EmployeeInfo))
         .then(res => {
-          console.log(res)
+          notiSuccess()
           return res
         })
-        .catch((err) => { return err })
+        .catch((err) => {
+          notiFail()
+          return err
+        })
     },
     getWebData () {
       axiosInstance.get('/resumeInfo', {

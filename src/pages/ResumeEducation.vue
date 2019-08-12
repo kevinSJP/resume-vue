@@ -45,7 +45,7 @@
 
 <script>
 import { studyStyle, SpecialType, cerType, degreeType, whetherType, NoType } from '../constant/index'
-import { modifyEmployeeInfo } from '../common/index'
+import { modifyEmployeeInfo, notiSuccess, notiFail } from '../common/index'
 import { axiosInstance } from '../boot/axios'
 
 export default {
@@ -154,8 +154,14 @@ export default {
   methods: {
     onSubmit () {
       axiosInstance.put('/resumeInfo', modifyEmployeeInfo(this.EmployeeInfo))
-        .then(res => { return res })
-        .catch((err) => { return err })
+        .then(res => {
+          notiSuccess()
+          return res
+        })
+        .catch((err) => {
+          notiFail()
+          return err
+        })
     },
     getWebData () {
       axiosInstance.get('/resumeInfo', {

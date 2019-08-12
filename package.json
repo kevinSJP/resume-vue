@@ -2,7 +2,7 @@
   "name": "resume-vue",
   "version": "0.0.1",
   "description": "Modify personal information",
-  "productName": "Resume App",
+  "productName": "Resume",
   "cordovaId": "org.cordova.quasar.app",
   "author": "ShaoJinpeng <shaojinpeng@bii.com.cn>",
   "private": true,

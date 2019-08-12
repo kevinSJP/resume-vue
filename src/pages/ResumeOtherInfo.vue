@@ -15,8 +15,8 @@
       <q-input clearable v-model="EmployeeInfo.resumeOtherInfo.isFamilymemberName" label="推荐人" error-message="请输入推荐人" :error="!isFamily"/>
       <q-input ref="remark" v-model="EmployeeInfo.resumeOtherInfo.remark" type="textarea" label="自我评价" :rules="[val => !!val || '必填']"/>
       <div>
-        <q-btn label="提交" @click="onSave"  color="primary"/>
-        <q-btn label="保存" type="submit"  color="primary" flat class="q-ml-sm" />
+        <!--<q-btn label="提交" @click="onSave"  color="primary"/>-->
+        <q-btn label="保存" type="submit"  color="primary" />
         <q-btn label="返回" @click="onBack" color="primary" flat class="q-ml-sm" />
       </div>
     </q-form>
@@ -28,7 +28,7 @@
 <script>
 import { whetherType } from '../constant/index'
 import { axiosInstance } from '../boot/axios'
-import { modifyEmployeeInfo } from '../common/index'
+import { modifyEmployeeInfo, notiSuccess, notiFail } from '../common/index'
 
 export default {
   name: 'otherInfo',
@@ -72,8 +72,14 @@ export default {
         this.hasError = false
       }
       axiosInstance.put('/resumeInfo', modifyEmployeeInfo(this.EmployeeInfo))
-        .then(res => { return res })
-        .catch((err) => { return err })
+        .then(res => {
+          notiSuccess()
+          return res
+        })
+        .catch((err) => {
+          notiFail()
+          return err
+        })
     },
     getWebData () {
       axiosInstance.get('/resumeInfo', {
