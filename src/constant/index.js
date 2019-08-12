@@ -4,13 +4,14 @@ export const whetherType = [
   { value: '1', label: '是' }]
 // 证件类型
 export const cardType = [
-  { value: '0', label: '大陆身份证' },
-  { label: '港澳台', value: '1' },
-  { label: '外籍身份证', value: '2' }]
+  { value: '1', label: '大陆身份证' },
+  { value: '2', label: '港澳台' },
+  { value: '3', label: '外籍身份证' },
+  { value: '4', label: '军官证' }]
 // 性别
 export const genderType = [
   { value: '1', label: '男' },
-  { label: '女', value: '2' }]
+  { value: '2', label: '女' }]
 // 政治面貌
 export const polityType = [
   { value: '0', label: '中共党员' },
