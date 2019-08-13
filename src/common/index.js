@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import { Notify } from 'quasar'
+import { axiosInstance } from '../boot/axios'
+
+/* 提交前修改EmployeeInfo对象 */
 export const modifyEmployeeInfo = (value) => {
   Vue.delete(value, 'id')
   Vue.delete(value, 'createdTime')
@@ -87,6 +90,7 @@ function isEmptyObject (obj) {
   return true
 }
 
+/* 提示成功 */
 export const notiSuccess = () => {
   Notify.create({
     color: 'green-4',
@@ -97,6 +101,7 @@ export const notiSuccess = () => {
   })
 }
 
+/* 提示失败 */
 export const notiFail = () => {
   Notify.create({
     color: 'red-5',
@@ -105,4 +110,24 @@ export const notiFail = () => {
     icon: 'fas fa-exclamation-triangle',
     message: '提交失败'
   })
+}
+
+/* 发请求判断是否有简历 */
+export const hasResume = () => {
+  return axiosInstance.get('/hasResumeInfo', {})
+}
+
+/* 发请求获取简历信息 */
+export const getResume = () => {
+  return axiosInstance.get('/resumeInfo', {})
+}
+
+/* 获取当前用户 */
+export const getUser = () => {
+  return axiosInstance.post('/user/info', {})
+}
+
+/* 保存简历 */
+export const putResume = (value) => {
+  return axiosInstance.put('/resumeInfo', value)
 }

@@ -27,8 +27,7 @@
 
 <script>
 import { whetherType } from '../constant/index'
-import { axiosInstance } from '../boot/axios'
-import { modifyEmployeeInfo, notiSuccess, notiFail } from '../common/index'
+import { modifyEmployeeInfo, notiSuccess, notiFail, hasResume, getResume, getUser, putResume } from '../common/index'
 
 export default {
   name: 'otherInfo',
@@ -71,7 +70,7 @@ export default {
       } else {
         this.hasError = false
       }
-      axiosInstance.put('/resumeInfo', modifyEmployeeInfo(this.EmployeeInfo))
+      putResume('/resumeInfo', modifyEmployeeInfo(this.EmployeeInfo))
         .then(res => {
           notiSuccess()
           return res
@@ -82,9 +81,22 @@ export default {
         })
     },
     getWebData () {
-      axiosInstance.get('/resumeInfo', {
-      }).then(res => {
-        this.EmployeeInfo = res.data.data
+      hasResume().then(res => {
+        console.log(res.data)
+        if (res.data.data === 1) {
+          getResume().then(res => {
+            this.EmployeeInfo = res.data.data
+            console.log(this.EmployeeInfo)
+          }).catch((err) => { return err })
+        } else {
+          getUser().then(res => {
+            this.EmployeeInfo.resumeNatural.cardNo = res.data.data.cardNo
+            this.EmployeeInfo.resumeNatural.name = res.data.data.name
+            this.EmployeeInfo.resumeCommunication.email = res.data.data.email
+            this.EmployeeInfo.resumeCommunication.tel = res.data.data.tel
+            console.log(this.EmployeeInfo)
+          }).catch((err) => { return err })
+        }
       }).catch((err) => { return err })
     },
     onBack () {
