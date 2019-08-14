@@ -14,10 +14,10 @@
         <span class="text-h6">社会活动 {{ (index+1) | noFilter }}</span>
         <q-separator blue/>
         <q-input v-model="item.name" label="活动名称" lazy-rules :rules="[val => !!val || '必填']"/>
-        <q-input clearable v-model="item.beginDate" label="开始日期(年-月)*" mask="####-##"
-                 lazy-rules :rules="[val => !!val || '必填']" />
-        <q-input clearable v-model="item.endDate" label="结束日期(年-月)*" mask="####-##"
-                 lazy-rules :rules="[val => !!val || '必填']" />
+        <q-input clearable v-model="item.beginDate" label="开始日期(年-月)*" mask="####-##" fill-mask="#"
+                 lazy-rules :rules="[val => !!val || '必填', val => val.indexOf('#') === -1 ||'未填写完整', val => ( parseInt(val.substr(0,4)) >=1900  && parseInt(val.substr(0,4)) <=2100  && parseInt(val.substr(5,2)) >=1  && parseInt(val.substr(5,2)) <=12) || '日期格式不对']" />
+        <q-input clearable v-model="item.endDate" label="结束日期(年-月)*" mask="####-##" fill-mask="#"
+                 lazy-rules :rules="[val => !!val || '必填', val => val.indexOf('#') === -1 ||'未填写完整', val => ( parseInt(val.substr(0,4)) >=1900  && parseInt(val.substr(0,4)) <=2100  && parseInt(val.substr(5,2)) >=1  && parseInt(val.substr(5,2)) <=12) || '日期格式不对']" />
         <q-input v-model="item.schoolName" label="所在单位" lazy-rules :rules="[val => !!val || '必填']"/>
         <q-input v-model="item.remark" label="职务和成果" lazy-rules :rules="[val => !!val || '必填']"/>
       </div>

@@ -15,8 +15,8 @@
         <q-separator blue/>
         <q-input  v-model="item.rewardName" label="名称" lazy-rules :rules="[val => !!val || '必填']"/>
         <q-select v-model="item.rewardLevel" :options="awardType" emit-value map-options label="奖惩级别" lazy-rules :rules="[val => !!val || '必填']"/>
-        <q-input clearable v-model="item.rewardDate" label="奖励日期(年-月-日)*" mask="####-##-##"
-                 lazy-rules :rules="[val => !!val || '必填']" />
+        <q-input clearable v-model="item.rewardDate" label="奖励日期(年-月-日)*" mask="####-##-##" fill-mask="#"
+                 lazy-rules :rules="[val => !!val || '必填', val => val.indexOf('#') === -1 ||'未填写完整', val => ( parseInt(val.substr(0,4)) >=1900  && parseInt(val.substr(0,4)) <=2100  && parseInt(val.substr(5,2)) >=1  && parseInt(val.substr(5,2)) <=12 && parseInt(val.substr(8,2)) >=1  && parseInt(val.substr(8,2)) <=31) || '日期格式不对']" />
         <q-input  v-model="item.rewardORG" label="奖励单位" lazy-rules :rules="[val => !!val || '必填']"/>
         <q-input  v-model="item.remark" label="说明" lazy-rules :rules="[val => !!val || '必填']"/>
       </div>

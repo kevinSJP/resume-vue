@@ -13,10 +13,10 @@
       <div v-for="(item, index) in EmployeeInfo.resumeEducation" :key="index">
         <span class="text-h6">教育经历 {{(index+1) | noFilter }}</span>
         <q-separator blue/>
-        <q-input ref="beginDate" clearable v-model="item.beginDate" label="开始日期(年-月)*" mask="####-##"
-                 lazy-rules :rules="[val => !!val || '必填']" />
-        <q-input ref="endDate" clearable v-model="item.endDate" label="毕业日期(年-月)*" mask="####-##"
-                 lazy-rules :rules="[val => !!val || '必填']" />
+        <q-input ref="beginDate" clearable v-model="item.beginDate" label="开始日期(年-月)*" mask="####-##" fill-mask="#"
+                 lazy-rules :rules="[val => !!val || '必填', val => val.indexOf('#') === -1 ||'未填写完整', val => ( parseInt(val.substr(0,4)) >=1900  && parseInt(val.substr(0,4)) <=2100  && parseInt(val.substr(5,2)) >=1  && parseInt(val.substr(5,2)) <=12) || '日期格式不对']" />
+        <q-input ref="endDate" clearable v-model="item.endDate" label="毕业日期(年-月)*" mask="####-##" fill-mask="#"
+                 lazy-rules :rules="[val => !!val || '必填', val => val.indexOf('#') === -1 ||'未填写完整', val => ( parseInt(val.substr(0,4)) >=1900  && parseInt(val.substr(0,4)) <=2100  && parseInt(val.substr(5,2)) >=1  && parseInt(val.substr(5,2)) <=12) || '日期格式不对']" />
         <q-input ref="schoolName" clearable v-model="item.schoolName" label="学校名称" lazy-rules :rules="[val => !!val || '必填']"/>
         <q-input ref="collegeName" clearable v-model="item.collegeName" label="所在院系" lazy-rules :rules="[val => !!val || '必填']"/>
         <q-input ref="specialtyName" clearable v-model="item.specialtyName" label="所学专业" lazy-rules :rules="[val => !!val || '必填']"/>

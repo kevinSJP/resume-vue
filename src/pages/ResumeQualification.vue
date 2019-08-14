@@ -13,8 +13,8 @@
       <div v-for="(item, index) in EmployeeInfo.resumeQualification" :key="index">
         <span class="text-h6">资格证书 {{ (index+1) | noFilter }}</span>
         <q-separator blue/>
-        <q-input clearable v-model="item.getDate" label="获得日期(年-月)*" mask="####-##"
-                 lazy-rules :rules="[val => !!val || '必填']" />
+        <q-input clearable v-model="item.getDate" label="获得日期(年-月)*" mask="####-##" fill-mask="#"
+                 lazy-rules :rules="[val => !!val || '必填', val => val.indexOf('#') === -1 ||'未填写完整', val => ( parseInt(val.substr(0,4)) >=1900  && parseInt(val.substr(0,4)) <=2100  && parseInt(val.substr(5,2)) >=1  && parseInt(val.substr(5,2)) <=12) || '日期格式不对']" />
         <q-input v-model="item.qualificationName" label="证书名称" lazy-rules :rules="[val => !!val || '必填']"/>
         <q-input v-model="item.qualificationNo" label="证书编号" lazy-rules :rules="[val => !!val || '必填']"/>
         <q-input v-model="item.qualificationOrg" label="颁发机构" lazy-rules :rules="[val => !!val || '必填']"/>

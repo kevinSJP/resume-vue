@@ -16,10 +16,10 @@
         <q-input v-model="item.projectName" label="项目名称" lazy-rules :rules="[val => !!val || '必填']"/>
         <q-input v-model="item.teamSize" label="团队规模" lazy-rules :rules="[val => !!val || '必填']"/>
         <q-input v-model="item.projectRole" label="团队角色" lazy-rules :rules="[val => !!val || '必填']"/>
-        <q-input clearable v-model="item.beginDate" label="开始日期(年-月)*" mask="####-##"
-                 lazy-rules :rules="[val => !!val || '必填']" />
-        <q-input clearable v-model="item.endDate" label="结束日期(年-月)*" mask="####-##"
-                 lazy-rules :rules="[val => !!val || '必填']" />
+        <q-input clearable v-model="item.beginDate" label="开始日期(年-月)*" mask="####-##" fill-mask="#"
+                 lazy-rules :rules="[val => !!val || '必填', val => val.indexOf('#') === -1 ||'未填写完整', val => ( parseInt(val.substr(0,4)) >=1900  && parseInt(val.substr(0,4)) <=2100  && parseInt(val.substr(5,2)) >=1  && parseInt(val.substr(5,2)) <=12) || '日期格式不对']" />
+        <q-input clearable v-model="item.endDate" label="结束日期(年-月)*" mask="####-##" fill-mask="#"
+                 lazy-rules :rules="[val => !!val || '必填', val => val.indexOf('#') === -1 ||'未填写完整', val => ( parseInt(val.substr(0,4)) >=1900  && parseInt(val.substr(0,4)) <=2100  && parseInt(val.substr(5,2)) >=1  && parseInt(val.substr(5,2)) <=12) || '日期格式不对']" />
         <q-input v-model="item.remark" label="项目描述" lazy-rules :rules="[val => !!val || '必填']"/>
       </div>
       <div>
