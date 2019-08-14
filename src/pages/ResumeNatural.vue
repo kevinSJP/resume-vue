@@ -23,8 +23,24 @@
           <!--</q-icon>-->
         <!--</template>-->
       </q-input>
-      <q-select ref="nativePlace" v-model="EmployeeInfo.resumeNatural.nativePlace" :options="areaType" emit-value map-options label="籍贯*" :rules="[val => !!val || '必填']" />
-      <q-select ref="hukouPlace" v-model="EmployeeInfo.resumeNatural.hukouPlace" :options="areaType" emit-value map-options label="户口所在地*" :rules="[val => !!val || '必填']" />
+      <q-select ref="nativePlace" use-input input-debounce="0" v-model="EmployeeInfo.resumeNatural.nativePlace" :options="areaType" emit-value map-options @filter="filterFn" label="籍贯*" :rules="[val => !!val || '必填']" >
+        <template v-slot:no-option>
+          <q-item>
+            <q-item-section class="text-grey">
+              无选项
+            </q-item-section>
+          </q-item>
+        </template>
+      </q-select>
+      <q-select ref="hukouPlace" use-input input-debounce="0" v-model="EmployeeInfo.resumeNatural.hukouPlace" :options="areaType" emit-value map-options @filter="filterFn" label="户口所在地*" :rules="[val => !!val || '必填']" >
+        <template v-slot:no-option>
+          <q-item>
+            <q-item-section class="text-grey">
+              无选项
+            </q-item-section>
+          </q-item>
+        </template>
+      </q-select>
       <q-select ref="polity" v-model="EmployeeInfo.resumeNatural.polity" :options="polityType" emit-value map-options label="政治面貌*" :rules="[val => !!val || '必填']" />
       <q-select ref="maritalStatus" v-model="EmployeeInfo.resumeNatural.maritalStatus" :options="maritalType" emit-value map-options label="婚姻状况*" :rules="[val => !!val || '必填']" />
       <q-input ref="height" type="number" v-model.number="EmployeeInfo.resumeNatural.height" label="身高(cm)*" lazy-rules :rules="[val => !!val || '必填']" />
@@ -178,6 +194,11 @@ export default {
           path: '/'
         })
       }
+    },
+    filterFn (val, update, abort) {
+      update(() => {
+        this.areaType = areaType.filter(v => v.label.indexOf(val) > -1)
+      })
     }
   }
 }
