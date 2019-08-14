@@ -29,8 +29,8 @@
       <!--/>-->
       <div>
         <!--<q-btn label="提交" @click="onSave"  color="primary"/>-->
-        <q-btn label="保存" type="submit"  color="primary" />
-        <q-btn label="返回" @click="onBack" color="primary" flat class="q-ml-sm" />
+        <q-btn label="保存" style="width: 45%" type="submit"  color="primary" />
+        <q-btn label="返回" style="width: 45%" @click="onBack" color="primary" flat class="q-ml-sm" />
       </div>
     </q-form>
   </div>

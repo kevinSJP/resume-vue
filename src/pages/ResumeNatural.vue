@@ -35,8 +35,8 @@
       <q-input ref="currentPlace" clearable v-model="EmployeeInfo.resumeNatural.currentPlace" label="通讯地址*"  lazy-rules :rules="[val => !!val || '必填']"/>
       <div>
         <!--<q-btn label="提交" @click="onSave"  color="primary"/>-->
-        <q-btn label="保存" type="submit"  color="primary" />
-        <q-btn label="返回" @click="onBack" color="primary" flat class="q-ml-sm" />
+        <q-btn label="保存" type="submit" style="width: 45%" color="primary" />
+        <q-btn label="返回" @click="onBack" style="width: 45%" color="primary" flat class="q-ml-sm" />
       </div>
     </q-form>
   </div>

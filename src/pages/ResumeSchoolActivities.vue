@@ -22,14 +22,14 @@
         <q-input v-model="item.remark" label="职务和成果" lazy-rules :rules="[val => !!val || '必填']"/>
       </div>
       <div>
-        <q-btn-group push>
-          <q-btn push label="增" icon="+" @click="increase"/>
-          <q-btn push label="减" icon="-" @click="decrease"/>
+        <q-btn-group style="width: 90%" push>
+          <q-btn push label="增" icon="+" style="width: 50%" @click="increase"/>
+          <q-btn push label="减" icon="-" style="width: 50%" @click="decrease"/>
         </q-btn-group>
       </div>
       <div>
-        <q-btn label="保存" type="submit"  color="primary"/>
-        <q-btn label="返回" @click="onBack" color="primary" flat class="q-ml-sm" />
+        <q-btn label="保存" type="submit" style="width: 45%" color="primary"/>
+        <q-btn label="返回" @click="onBack" style="width: 45%" color="primary" flat class="q-ml-sm" />
       </div>
     </q-form>
   </div>
