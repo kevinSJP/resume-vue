@@ -70,7 +70,7 @@ export default {
       } else {
         this.hasError = false
       }
-      putResume('/resumeInfo', modifyEmployeeInfo(this.EmployeeInfo))
+      putResume(modifyEmployeeInfo(this.EmployeeInfo))
         .then(res => {
           notiSuccess()
           return res

@@ -151,7 +151,7 @@ export default {
         let dd = (this.EmployeeInfo.resumeNatural.cardNo.substr(12, 2))
         this.EmployeeInfo.resumeNatural.birthDate = yyyy + '-' + mm + '-' + dd
       }
-      putResume('/resumeInfo', modifyEmployeeInfo(this.EmployeeInfo))
+      putResume(modifyEmployeeInfo(this.EmployeeInfo))
         .then(res => {
           notiSuccess()
           return res

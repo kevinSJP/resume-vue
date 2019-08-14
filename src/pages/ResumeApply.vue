@@ -74,7 +74,7 @@ export default {
         this.hasError = false
       }
       console.log(modifyEmployeeInfo(this.EmployeeInfo))
-      putResume('/resumeInfo', modifyEmployeeInfo(this.EmployeeInfo))
+      putResume(modifyEmployeeInfo(this.EmployeeInfo))
         .then(res => {
           notiSuccess()
           return res

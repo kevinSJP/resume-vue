@@ -109,7 +109,7 @@ export default {
   },
   methods: {
     onSubmit () {
-      putResume('/resumeInfo', modifyEmployeeInfo(this.EmployeeInfo))
+      putResume(modifyEmployeeInfo(this.EmployeeInfo))
         .then(res => {
           notiSuccess()
           return res
