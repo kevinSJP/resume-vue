@@ -82,7 +82,7 @@
       <q-card-section  class="q-py-none">
         <div class="row items-center no-wrap">
           <div class="col">
-            <div class="text-h6">工作经历</div>
+            <div class="text-h6">工作实习经历</div>
           </div>
           <div class="col-auto">
             <q-btn color="grey-7" round flat icon="edit" @click="goInternship"></q-btn>

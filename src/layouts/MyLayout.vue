@@ -34,7 +34,7 @@
         <q-item-label header>简历项目</q-item-label>
         <q-item clickable tag="a" target="_blank" @click="goApply" >
           <q-item-section avatar>
-            <q-icon name="school" />
+            <q-icon name="code" />
           </q-item-section>
           <q-item-section>
             <q-item-label>申请职位</q-item-label>
@@ -43,7 +43,7 @@
         </q-item>
         <q-item clickable tag="a" target="_blank" @click="goNatural">
           <q-item-section avatar>
-            <q-icon name="code" />
+            <q-icon name="record_voice_over" />
           </q-item-section>
           <q-item-section>
             <q-item-label>基本信息</q-item-label>
@@ -52,7 +52,7 @@
         </q-item>
         <q-item clickable tag="a" target="_blank" @click="goEducation">
           <q-item-section avatar>
-            <q-icon name="chat" />
+            <q-icon name="school" />
           </q-item-section>
           <q-item-section>
             <q-item-label>教育信息</q-item-label>
@@ -61,7 +61,7 @@
         </q-item>
         <q-item clickable tag="a" target="_blank" @click="goInternship">
           <q-item-section avatar>
-            <q-icon name="record_voice_over" />
+            <q-icon name="work" />
           </q-item-section>
           <q-item-section>
             <q-item-label>工作/实习经历</q-item-label>
@@ -70,7 +70,7 @@
         </q-item>
         <q-item clickable tag="a" target="_blank" @click="goQualification">
           <q-item-section avatar>
-            <q-icon name="rss_feed" />
+            <q-icon name="book" />
           </q-item-section>
           <q-item-section>
             <q-item-label>资格证书</q-item-label>
@@ -88,7 +88,7 @@
         </q-item>
         <q-item clickable tag="a" target="_blank" @click="goReward">
           <q-item-section avatar>
-            <q-icon name="public" />
+            <q-icon name="web" />
           </q-item-section>
           <q-item-section>
             <q-item-label>奖励信息</q-item-label>
@@ -97,7 +97,7 @@
         </q-item>
         <q-item clickable tag="a" target="_blank" @click="goProject">
           <q-item-section avatar>
-            <q-icon name="public" />
+            <q-icon name="chat" />
           </q-item-section>
           <q-item-section>
             <q-item-label>项目经验</q-item-label>
@@ -106,7 +106,7 @@
         </q-item>
         <q-item clickable tag="a" target="_blank" @click="goSchoolActivities">
           <q-item-section avatar>
-            <q-icon name="public" />
+            <q-icon name="rss_feed" />
           </q-item-section>
           <q-item-section>
             <q-item-label>社会活动</q-item-label>
@@ -115,7 +115,7 @@
         </q-item>
         <q-item clickable tag="a" target="_blank" @click="goOtherInfo">
           <q-item-section avatar>
-            <q-icon name="public" />
+            <q-icon name="more" />
           </q-item-section>
           <q-item-section>
             <q-item-label>其他信息</q-item-label>

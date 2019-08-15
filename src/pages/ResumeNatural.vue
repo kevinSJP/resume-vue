@@ -151,6 +151,11 @@ export default {
         let dd = (this.EmployeeInfo.resumeNatural.cardNo.substr(12, 2))
         this.EmployeeInfo.resumeNatural.birthDate = yyyy + '-' + mm + '-' + dd
       }
+      if (this.EmployeeInfo.resumeNatural.cardNo) {
+        let i = (parseInt(this.EmployeeInfo.resumeNatural.cardNo.substr(16, 1)) % 2)
+        if (i === 0) { i = '2' } else { i = '1' }
+        this.EmployeeInfo.resumeNatural.birthDate = i
+      }
       putResume(modifyEmployeeInfo(this.EmployeeInfo))
         .then(res => {
           notiSuccess()
