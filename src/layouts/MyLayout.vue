@@ -16,10 +16,11 @@
           个人简历
         </q-toolbar-title>
 
-        <q-btn round>
-          <q-avatar size="42px">
-            <img src="https://imc.bii.com.cn/rect/file/download/avatar" :onerror="defaultImg">
-          </q-avatar>
+        <input ref="photo" type="file" @input="val => { file = val[0] }" @change="onPhotoChange" style="display: none" accept="image/*, .jpeg, .jpeg" />
+        <q-btn @click="getPhoto" round>
+        <q-avatar size="42px" >
+          <img ref="iAvatar" :src="imgUrl" :onerror="defaultImg">
+        </q-avatar>
         </q-btn>
         <!--<div>v{{ $q.version }}</div>-->
       </q-toolbar>
@@ -122,15 +123,16 @@
             <q-item-label caption>个人简评及推荐人</q-item-label>
           </q-item-section>
         </q-item>
-        <!--<q-item clickable tag="a" target="_blank" href="https://facebook.quasar.dev">-->
-          <!--<q-item-section avatar>-->
-            <!--<q-icon name="public" />-->
-          <!--</q-item-section>-->
-          <!--<q-item-section>-->
-            <!--<q-item-label>简历附件</q-item-label>-->
-            <!--<q-item-label caption>上传简历</q-item-label>-->
-          <!--</q-item-section>-->
-        <!--</q-item>-->
+        <q-item clickable tag="a" target="_blank" @click="getFile">
+          <input ref="rFile" type="file" @input="val => { file2 = val[0] }" @change="onFileChange" style="display: none" accept="application/msword,application/pdf,*.pdf, *.doc, *.docx" />
+          <q-item-section avatar>
+            <q-icon name="public" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>简历附件</q-item-label>
+            <q-item-label caption>仅能上传一份简历</q-item-label>
+          </q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 
@@ -142,12 +144,19 @@
 
 <script>
 import { openURL } from 'quasar'
+import { postFile, notiSuccess, notiFail, overMax } from '../common/index'
 
 export default {
   name: 'MyLayout',
+  created () {
+    this.imgUrl = this.imgUrl + '?seed = ' + new Date().toLocaleString()
+  },
   data () {
     return {
-      leftDrawerOpen: this.$q.platform.is.desktop
+      leftDrawerOpen: this.$q.platform.is.desktop,
+      file: null,
+      file2: null,
+      imgUrl: 'https://imc.bii.com.cn/rect/file/download/avatar'
     }
   },
   computed: {
@@ -216,6 +225,43 @@ export default {
         path: '/otherInfo',
         name: 'otherInfo'
       })
+    },
+    getPhoto () {
+      this.$refs.photo.dispatchEvent(new MouseEvent('click'))
+    },
+    getFile () {
+      this.$refs.rFile.dispatchEvent(new MouseEvent('click'))
+    },
+    onPhotoChange () {
+      console.log(this.$refs.photo.files[0])
+      let formData = new FormData()
+      formData.append('file', this.$refs.photo.files[0])
+      formData.append('type', 1)
+      postFile(formData).then(res => {
+        notiSuccess()
+        this.imgUrl = this.imgUrl + '?seed = ' + new Date().toLocaleString()
+        return res
+      }).catch((err) => {
+        notiFail()
+        return err
+      })
+    },
+    onFileChange () {
+      console.log(this.$refs.rFile.files[0].size)
+      if (this.$refs.rFile.files[0].size >= 1024 * 1024) {
+        overMax()
+      } else {
+        let formData = new FormData()
+        formData.append('file', this.$refs.rFile.files[0])
+        formData.append('type', 2)
+        postFile(formData).then(res => {
+          notiSuccess()
+          return res
+        }).catch((err) => {
+          notiFail()
+          return err
+        })
+      }
     }
   }
 }

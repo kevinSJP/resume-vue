@@ -135,6 +135,17 @@ export const notiFail = () => {
   })
 }
 
+/* 文件太大 */
+export const overMax = () => {
+  Notify.create({
+    color: 'red-5',
+    textColor: 'white',
+    position: 'top',
+    icon: 'fas fa-exclamation-triangle',
+    message: '文件大于1M，请压缩后上传'
+  })
+}
+
 /* 发请求判断是否有简历 */
 export const hasResume = () => {
   return axiosInstance.get('/hasResumeInfo', {})
@@ -153,4 +164,9 @@ export const getUser = () => {
 /* 保存简历 */
 export const putResume = (value) => {
   return axiosInstance.put('/resumeInfo', value)
+}
+
+/* 保存文件 */
+export const postFile = (value) => {
+  return axiosInstance.post('/file/upload', value)
 }
