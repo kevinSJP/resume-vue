@@ -73,7 +73,7 @@
           <table style="width: 100%">
             <tr v-for="(item, index) in EmployeeInfo.resumeEducation" :key="index">
               <td style="text-align: center ; width: 10%">
-                <q-icon class="q-pa-auto" :name="iconMethod(index+1)" />{{index+1 }}
+                <q-icon class="q-pa-auto" :name="iconMethod(index+1)" />
               </td>
               <td style="text-align: left"> 自{{item.beginDate | dateFilter}}至{{item.endDate | dateFilter}}
                 就读于{{item.schoolName}}{{item.specialtyName}}专业获得{{item.certificateLevel | cerFilter}}学历</td>
@@ -101,7 +101,7 @@
           <table style="width: 100%">
             <tr v-for="(item, index) in EmployeeInfo.resumeInternship" :key="index">
               <td style="text-align: center ; width: 10%">
-                <q-icon class="q-pa-auto" :name="iconMethod(index+1)" />{{index+1}}
+                <q-icon class="q-pa-auto" :name="iconMethod(index+1)" />
               </td>
               <td style="text-align: left">自{{item.beginDate | dateFilter}}至{{item.endDate | dateFilter}}在
                 {{item.companyName}}{{item.departmentName}}工作，职位{{item.positionName }}</td>
@@ -128,7 +128,9 @@
         <div v-show="qualificationEmpty">
           <table style="width: 100%">
             <tr v-for="(item, index) in EmployeeInfo.resumeQualification" :key="index">
-              <td style="text-align: center ; width: 10%">{{index+1}} </td>
+              <td style="text-align: center ; width: 10%">
+                <q-icon class="q-pa-auto" :name="iconMethod(index+1)" />
+              </td>
               <td style="text-align: left">{{item.getDate | dateFilter}}获得{{item.qualificationName}}证书，由{{item.qualificationOrg }}颁发</td>
             </tr>
           </table>
@@ -153,7 +155,9 @@
         <div v-show="familyEmpty">
           <table style="width: 100%">
             <tr v-for="(item, index) in EmployeeInfo.resumeFamily" :key="index">
-              <td style="text-align: center ; width: 10%">{{index+1}} </td>
+              <td style="text-align: center ; width: 10%">
+                <q-icon class="q-pa-auto" :name="iconMethod(index+1)" />
+              </td>
               <td style="text-align: left">{{item.relationship | familyFilter}}是{{item.name }}在
                 {{item.company}}工作，政治面貌{{item.polity | polityFilter}}</td>
             </tr>
@@ -179,7 +183,9 @@
         <div v-show="rewardEmpty">
           <table style="width: 100%">
             <tr v-for="(item, index) in EmployeeInfo.resumeReward" :key="index">
-              <td style="text-align: center ; width: 10%">{{index+1}} </td>
+              <td style="text-align: center ; width: 10%">
+                <q-icon class="q-pa-auto" :name="iconMethod(index+1)" />
+              </td>
               <td style="text-align: left">{{item.rewardDate | dateFilter}}获得{{item.rewardName}}({{item.rewardLevel | awardFilter}})奖励</td>
             </tr>
           </table>
@@ -204,7 +210,9 @@
         <div v-show="projectEmpty">
           <table style="width: 100%">
             <tr v-for="(item, index) in EmployeeInfo.resumeProject" :key="index">
-              <td style="text-align: center ; width: 10%">{{index+1}} </td>
+              <td style="text-align: center ; width: 10%">
+                <q-icon class="q-pa-auto" :name="iconMethod(index+1)" />
+              </td>
               <td style="text-align: left">自{{item.beginDate | dateFilter}}至{{item.endDate | dateFilter}}参与项目：
                 {{item.projectName}}，在团队中担任{{item.projectRole}}角色</td>
             </tr>
@@ -230,7 +238,9 @@
         <div v-show="schoolActivitiesEmpty">
           <table style="width: 100%">
             <tr v-for="(item, index) in EmployeeInfo.resumeSchoolActivities" :key="index">
-              <td style="text-align: center ; width: 10%">{{index+1}} </td>
+              <td style="text-align: center ; width: 10%">
+                <q-icon class="q-pa-auto" :name="iconMethod(index+1)" />
+              </td>
               <td style="text-align: left">自{{item.beginDate | dateFilter}}至{{item.endDate | dateFilter}}参与
                 {{item.name}}取得成果如下成果，{{item.remark}}</td>
             </tr>
