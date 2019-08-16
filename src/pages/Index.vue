@@ -4,6 +4,7 @@
     <q-card inline class="my-card bg-grey-1">
       <q-card-section  class="q-py-none">
         <div class="row items-center no-wrap">
+          <q-icon class="avatar q-pa-xs" name="img:statics/icons/job.svg" />
           <div class="col">
             <div class="text-h6">申请职位</div>
           </div>
@@ -24,6 +25,7 @@
     <q-card inline class="my-card bg-grey-1">
       <q-card-section  class="q-py-none">
         <div class="row items-center no-wrap">
+          <q-icon class="avatar q-pa-xs" name="img:statics/icons/psn.svg" />
           <div class="col">
             <div class="text-h6">基本信息</div>
           </div>
@@ -56,6 +58,7 @@
     <q-card inline class="my-card bg-grey-1">
       <q-card-section  class="q-py-none">
         <div class="row items-center no-wrap">
+          <q-icon class="avatar q-pa-xs" name="img:statics/icons/edu.svg" />
           <div class="col">
             <div class="text-h6">教育信息</div>
           </div>
@@ -69,7 +72,9 @@
         <div v-show="eduEmpty">
           <table style="width: 100%">
             <tr v-for="(item, index) in EmployeeInfo.resumeEducation" :key="index">
-              <td style="text-align: center ; width: 10%">{{index+1}} </td>
+              <td style="text-align: center ; width: 10%">
+                <q-icon class="q-pa-auto" :name="iconMethod(index+1)" />{{index+1 }}
+              </td>
               <td style="text-align: left"> 自{{item.beginDate | dateFilter}}至{{item.endDate | dateFilter}}
                 就读于{{item.schoolName}}{{item.specialtyName}}专业获得{{item.certificateLevel | cerFilter}}学历</td>
             </tr>
@@ -81,6 +86,7 @@
     <q-card inline class="my-card bg-grey-1">
       <q-card-section  class="q-py-none">
         <div class="row items-center no-wrap">
+          <q-icon class="avatar q-pa-xs" name="img:statics/icons/work.svg" />
           <div class="col">
             <div class="text-h6">工作实习经历</div>
           </div>
@@ -94,7 +100,9 @@
         <div v-show="internshipEmpty">
           <table style="width: 100%">
             <tr v-for="(item, index) in EmployeeInfo.resumeInternship" :key="index">
-              <td style="text-align: center ; width: 10%">{{index+1}} </td>
+              <td style="text-align: center ; width: 10%">
+                <q-icon class="q-pa-auto" :name="iconMethod(index+1)" />{{index+1}}
+              </td>
               <td style="text-align: left">自{{item.beginDate | dateFilter}}至{{item.endDate | dateFilter}}在
                 {{item.companyName}}{{item.departmentName}}工作，职位{{item.positionName }}</td>
             </tr>
@@ -106,6 +114,7 @@
     <q-card inline class="my-card bg-grey-1">
       <q-card-section  class="q-py-none">
         <div class="row items-center no-wrap">
+          <q-icon class="avatar q-pa-xs" name="img:statics/icons/qualify.svg" />
           <div class="col">
             <div class="text-h6">资格证书</div>
           </div>
@@ -130,6 +139,7 @@
     <q-card inline class="my-card bg-grey-1">
       <q-card-section  class="q-py-none">
         <div class="row items-center no-wrap">
+          <q-icon class="avatar q-pa-xs" name="img:statics/icons/family.svg" />
           <div class="col">
             <div class="text-h6">家庭成员</div>
           </div>
@@ -155,6 +165,7 @@
     <q-card inline class="my-card bg-grey-1">
       <q-card-section  class="q-py-none">
         <div class="row items-center no-wrap">
+          <q-icon class="avatar q-pa-xs" name="img:statics/icons/award.svg" />
           <div class="col">
             <div class="text-h6">奖励信息</div>
           </div>
@@ -179,6 +190,7 @@
     <q-card inline class="my-card bg-grey-1">
       <q-card-section  class="q-py-none">
         <div class="row items-center no-wrap">
+          <q-icon class="avatar q-pa-xs" name="img:statics/icons/project.svg" />
           <div class="col">
             <div class="text-h6">项目经历</div>
           </div>
@@ -204,6 +216,7 @@
     <q-card inline class="my-card bg-grey-1">
       <q-card-section  class="q-py-none">
         <div class="row items-center no-wrap">
+          <q-icon class="avatar q-pa-xs" name="img:statics/icons/active.svg" />
           <div class="col">
             <div class="text-h6">社会活动</div>
           </div>
@@ -229,6 +242,7 @@
     <q-card inline class="my-card bg-grey-1">
       <q-card-section  class="q-py-none">
         <div class="row items-center no-wrap">
+          <q-icon class="avatar q-pa-xs" name="img:statics/icons/other.svg" />
           <div class="col">
             <div class="text-h6">其他信息</div>
           </div>
@@ -646,6 +660,9 @@ export default {
           EmployeeInfo: this.EmployeeInfo
         }
       })
+    },
+    iconMethod (value) {
+      return 'img:statics/icons/' + value + '.ico'
     },
     /* *****获取数据*******/
     getWebData () {

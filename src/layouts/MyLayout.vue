@@ -35,7 +35,7 @@
         <q-item-label header>简历项目</q-item-label>
         <q-item clickable tag="a" target="_blank" @click="goApply" >
           <q-item-section avatar>
-            <q-icon name="code" />
+            <q-icon name="img:statics/icons/job.svg" />
           </q-item-section>
           <q-item-section>
             <q-item-label>申请职位</q-item-label>
@@ -44,7 +44,7 @@
         </q-item>
         <q-item clickable tag="a" target="_blank" @click="goNatural">
           <q-item-section avatar>
-            <q-icon name="record_voice_over" />
+            <q-icon name="img:statics/icons/psn.svg" />
           </q-item-section>
           <q-item-section>
             <q-item-label>基本信息</q-item-label>
@@ -53,7 +53,7 @@
         </q-item>
         <q-item clickable tag="a" target="_blank" @click="goEducation">
           <q-item-section avatar>
-            <q-icon name="school" />
+            <q-icon name="img:statics/icons/edu.svg" />
           </q-item-section>
           <q-item-section>
             <q-item-label>教育信息</q-item-label>
@@ -62,7 +62,7 @@
         </q-item>
         <q-item clickable tag="a" target="_blank" @click="goInternship">
           <q-item-section avatar>
-            <q-icon name="work" />
+            <q-icon name="img:statics/icons/work.svg" />
           </q-item-section>
           <q-item-section>
             <q-item-label>工作/实习经历</q-item-label>
@@ -71,7 +71,7 @@
         </q-item>
         <q-item clickable tag="a" target="_blank" @click="goQualification">
           <q-item-section avatar>
-            <q-icon name="book" />
+            <q-icon name="img:statics/icons/qualify.svg" />
           </q-item-section>
           <q-item-section>
             <q-item-label>资格证书</q-item-label>
@@ -80,7 +80,7 @@
         </q-item>
         <q-item clickable tag="a" target="_blank" @click="goFamily">
           <q-item-section avatar>
-            <q-icon name="public" />
+            <q-icon name="img:statics/icons/family.svg" />
           </q-item-section>
           <q-item-section>
             <q-item-label>家庭信息</q-item-label>
@@ -89,7 +89,7 @@
         </q-item>
         <q-item clickable tag="a" target="_blank" @click="goReward">
           <q-item-section avatar>
-            <q-icon name="web" />
+            <q-icon name="img:statics/icons/award.svg" />
           </q-item-section>
           <q-item-section>
             <q-item-label>奖励信息</q-item-label>
@@ -98,7 +98,7 @@
         </q-item>
         <q-item clickable tag="a" target="_blank" @click="goProject">
           <q-item-section avatar>
-            <q-icon name="chat" />
+            <q-icon name="img:statics/icons/project.svg" />
           </q-item-section>
           <q-item-section>
             <q-item-label>项目经验</q-item-label>
@@ -107,7 +107,7 @@
         </q-item>
         <q-item clickable tag="a" target="_blank" @click="goSchoolActivities">
           <q-item-section avatar>
-            <q-icon name="rss_feed" />
+            <q-icon name="img:statics/icons/active.svg" />
           </q-item-section>
           <q-item-section>
             <q-item-label>社会活动</q-item-label>
@@ -116,7 +116,7 @@
         </q-item>
         <q-item clickable tag="a" target="_blank" @click="goOtherInfo">
           <q-item-section avatar>
-            <q-icon name="more" />
+            <q-icon name="img:statics/icons/other.svg" />
           </q-item-section>
           <q-item-section>
             <q-item-label>其他信息</q-item-label>
@@ -126,7 +126,7 @@
         <q-item clickable tag="a" target="_blank" @click="getFile">
           <input ref="rFile" type="file" @input="val => { file2 = val[0] }" @change="onFileChange" style="display: none" accept="application/msword,application/pdf,*.pdf, *.doc, *.docx" />
           <q-item-section avatar>
-            <q-icon name="public" />
+            <q-icon name="img:statics/icons/file.svg" />
           </q-item-section>
           <q-item-section>
             <q-item-label>简历附件</q-item-label>
