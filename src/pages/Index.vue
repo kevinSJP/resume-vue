@@ -158,7 +158,7 @@
               <td style="text-align: center ; width: 10%">
                 <q-icon class="q-pa-auto" :name="iconMethod(index+1)" />
               </td>
-              <td style="text-align: left">{{item.relationship | familyFilter}}是{{item.name }}在
+              <td style="text-align: left">{{item.relationship | familyFilter}}是{{item.name }},
                 {{item.company}}工作，政治面貌{{item.polity | polityFilter}}</td>
             </tr>
           </table>
@@ -264,7 +264,7 @@
       <q-separator white/>
       <q-card-section>
         <table>
-        <tr> <td>是否推荐：</td> <td>{{EmployeeInfo.resumeOtherInfo.isFamilymember | whetherFilter}} </td> </tr>
+        <tr> <td style="width: 15%">是否推荐：</td> <td>{{EmployeeInfo.resumeOtherInfo.isFamilymember | whetherFilter}} </td> </tr>
         <tr> <td>推荐人：</td> <td>{{EmployeeInfo.resumeOtherInfo.isFamilymemberName | NullFilter}} </td> </tr>
         <tr> <td>是否接受调配：</td> <td>{{EmployeeInfo.resumeOtherInfo.isPostDeployment | whetherFilter}} </td> </tr>
         <tr> <td>自我评价：</td> <td>{{EmployeeInfo.resumeOtherInfo.remark}}</td> </tr>
@@ -421,7 +421,7 @@ export default {
   },
   computed: {
     eduEmpty () {
-      if (this.EmployeeInfo.resumeEducation[0].beginDate) {
+      if (this.EmployeeInfo.resumeEducation.length !== 0) {
         console.log('aa')
         if (this.EmployeeInfo.resumeEducation[0].beginDate.length !== 0) {
           return true
@@ -433,7 +433,7 @@ export default {
       }
     },
     internshipEmpty () {
-      if (this.EmployeeInfo.resumeInternship[0].beginDate) {
+      if (this.EmployeeInfo.resumeInternship.length !== 0) {
         if (this.EmployeeInfo.resumeInternship[0].beginDate.length !== 0) {
           return true
         } else {
@@ -444,7 +444,7 @@ export default {
       }
     },
     qualificationEmpty () {
-      if (this.EmployeeInfo.resumeQualification[0].getDate) {
+      if (this.EmployeeInfo.resumeQualification.length !== 0) {
         if (this.EmployeeInfo.resumeQualification[0].getDate.length !== 0) {
           return true
         } else {
@@ -455,7 +455,7 @@ export default {
       }
     },
     familyEmpty () {
-      if (this.EmployeeInfo.resumeFamily[0].name) {
+      if (this.EmployeeInfo.resumeFamily.length !== 0) {
         if (this.EmployeeInfo.resumeFamily[0].name.length !== 0) {
           return true
         } else {
@@ -466,7 +466,7 @@ export default {
       }
     },
     rewardEmpty () {
-      if (this.EmployeeInfo.resumeReward[0].rewardDate) {
+      if (this.EmployeeInfo.resumeReward.length !== 0) {
         if (this.EmployeeInfo.resumeReward[0].rewardDate.length !== 0) {
           return true
         } else {
@@ -477,7 +477,7 @@ export default {
       }
     },
     projectEmpty () {
-      if (this.EmployeeInfo.resumeProject[0].projectName) {
+      if (this.EmployeeInfo.resumeProject.length !== 0) {
         if (this.EmployeeInfo.resumeProject[0].projectName.length !== 0) {
           return true
         } else {
@@ -488,7 +488,7 @@ export default {
       }
     },
     schoolActivitiesEmpty () {
-      if (this.EmployeeInfo.resumeSchoolActivities[0].beginDate) {
+      if (this.EmployeeInfo.resumeSchoolActivities.length !== 0) {
         if (this.EmployeeInfo.resumeSchoolActivities[0].beginDate.length !== 0) {
           return true
         } else {
