@@ -29,8 +29,8 @@
       </div>
       <div>
         <q-btn-group style="width: 90%"  push>
-          <q-btn push label="增" icon="+" style="width: 50%" @click="increase"/>
-          <q-btn push label="减" icon="-" style="width: 50%" @click="decrease"/>
+          <q-btn push label="新增" icon="+" style="width: 50%" @click="increase"/>
+          <q-btn push label="删除" icon="-" style="width: 50%" @click="decrease"/>
         </q-btn-group>
       </div>
       <div>

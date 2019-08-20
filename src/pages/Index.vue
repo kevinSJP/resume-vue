@@ -416,86 +416,170 @@ export default {
           name: '',
           remark: '',
           schoolName: '' }]
-      }
+      },
+      isNewResume: '1'
     }
   },
   computed: {
     eduEmpty () {
-      if (this.EmployeeInfo.resumeEducation.length !== 0) {
-        console.log('aa')
-        if (this.EmployeeInfo.resumeEducation[0].beginDate.length !== 0) {
-          return true
+      if (this.isNewResume === '0') {
+        if (this.EmployeeInfo.resumeEducation.length !== 0) {
+          if (this.EmployeeInfo.resumeEducation[0].beginDate.length !== 0) {
+            return true
+          } else {
+            return false
+          }
         } else {
           return false
         }
       } else {
-        return false
+        if (this.EmployeeInfo.resumeEducation[0].beginDate) {
+          if (this.EmployeeInfo.resumeEducation[0].beginDate.length !== 0) {
+            return true
+          } else {
+            return false
+          }
+        } else {
+          return false
+        }
       }
     },
     internshipEmpty () {
-      if (this.EmployeeInfo.resumeInternship.length !== 0) {
-        if (this.EmployeeInfo.resumeInternship[0].beginDate.length !== 0) {
-          return true
+      if (this.isNewResume === '0') {
+        if (this.EmployeeInfo.resumeInternship.length !== 0) {
+          if (this.EmployeeInfo.resumeInternship[0].beginDate.length !== 0) {
+            return true
+          } else {
+            return false
+          }
         } else {
           return false
         }
       } else {
-        return false
+        if (this.EmployeeInfo.resumeInternship[0].beginDate) {
+          if (this.EmployeeInfo.resumeInternship[0].beginDate.length !== 0) {
+            return true
+          } else {
+            return false
+          }
+        } else {
+          return false
+        }
       }
     },
     qualificationEmpty () {
-      if (this.EmployeeInfo.resumeQualification.length !== 0) {
-        if (this.EmployeeInfo.resumeQualification[0].getDate.length !== 0) {
-          return true
+      if (this.isNewResume === '0') {
+        if (this.EmployeeInfo.resumeQualification.length !== 0) {
+          if (this.EmployeeInfo.resumeQualification[0].getDate.length !== 0) {
+            return true
+          } else {
+            return false
+          }
         } else {
           return false
         }
       } else {
-        return false
+        if (this.EmployeeInfo.resumeQualification[0].getDate) {
+          if (this.EmployeeInfo.resumeQualification[0].getDate.length !== 0) {
+            return true
+          } else {
+            return false
+          }
+        } else {
+          return false
+        }
       }
     },
     familyEmpty () {
-      if (this.EmployeeInfo.resumeFamily.length !== 0) {
-        if (this.EmployeeInfo.resumeFamily[0].name.length !== 0) {
-          return true
+      if (this.isNewResume === '0') {
+        if (this.EmployeeInfo.resumeFamily.length !== 0) {
+          if (this.EmployeeInfo.resumeFamily[0].name.length !== 0) {
+            return true
+          } else {
+            return false
+          }
         } else {
           return false
         }
       } else {
-        return false
+        if (this.EmployeeInfo.resumeFamily[0].name) {
+          if (this.EmployeeInfo.resumeFamily[0].name.length !== 0) {
+            return true
+          } else {
+            return false
+          }
+        } else {
+          return false
+        }
       }
     },
     rewardEmpty () {
-      if (this.EmployeeInfo.resumeReward.length !== 0) {
-        if (this.EmployeeInfo.resumeReward[0].rewardDate.length !== 0) {
-          return true
+      if (this.isNewResume === '0') {
+        if (this.EmployeeInfo.resumeReward.length !== 0) {
+          if (this.EmployeeInfo.resumeReward[0].rewardDate.length !== 0) {
+            return true
+          } else {
+            return false
+          }
         } else {
           return false
         }
       } else {
-        return false
+        if (this.EmployeeInfo.resumeReward[0].rewardDate) {
+          if (this.EmployeeInfo.resumeReward[0].rewardDate.length !== 0) {
+            return true
+          } else {
+            return false
+          }
+        } else {
+          return false
+        }
       }
     },
     projectEmpty () {
-      if (this.EmployeeInfo.resumeProject.length !== 0) {
-        if (this.EmployeeInfo.resumeProject[0].projectName.length !== 0) {
-          return true
+      if (this.isNewResume === '0') {
+        if (this.EmployeeInfo.resumeProject.length !== 0) {
+          if (this.EmployeeInfo.resumeProject[0].projectName.length !== 0) {
+            return true
+          } else {
+            return false
+          }
         } else {
           return false
         }
       } else {
-        return false
+        if (this.EmployeeInfo.resumeProject[0].projectName) {
+          if (this.EmployeeInfo.resumeProject[0].projectName.length !== 0) {
+            return true
+          } else {
+            return false
+          }
+        } else {
+          return false
+        }
       }
     },
     schoolActivitiesEmpty () {
-      if (this.EmployeeInfo.resumeSchoolActivities.length !== 0) {
-        if (this.EmployeeInfo.resumeSchoolActivities[0].beginDate.length !== 0) {
-          return true
+      if (this.isNewResume === '0') {
+        if (this.EmployeeInfo.resumeSchoolActivities.length !== 0) {
+          if (this.EmployeeInfo.resumeSchoolActivities[0].beginDate.length !== 0) {
+            return true
+          } else {
+            return false
+          }
         } else {
           return false
         }
       } else {
-        return false
+        if (this.EmployeeInfo.resumeSchoolActivities[0].beginDate) {
+          if (this.EmployeeInfo.resumeSchoolActivities[0].beginDate.length !== 0) {
+            return true
+          } else {
+            return false
+          }
+        } else {
+          return false
+        }
       }
     }
   },
@@ -679,11 +763,13 @@ export default {
       hasResume().then(res => {
         console.log(res.data)
         if (res.data.data === 1) {
+          this.isNewResume = '0'
           getResume().then(res => {
             this.EmployeeInfo = res.data.data
             console.log(this.EmployeeInfo)
           }).catch((err) => { return err })
         } else {
+          this.isNewResume = '1'
           getUser().then(res => {
             this.EmployeeInfo.resumeNatural.cardNo = res.data.data.cardNo
             this.EmployeeInfo.resumeNatural.name = res.data.data.name
