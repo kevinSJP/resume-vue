@@ -289,6 +289,7 @@ export default {
   },
   data () {
     return {
+      // EmployeeInfo: {},
       EmployeeInfo: { applyStatus: '',
         cardNo: '',
         createdTime: '',
@@ -379,7 +380,7 @@ export default {
           languageType: '',
           modifiedTime: '',
           name: '' }],
-        resumeProject: [{ beginDate: '2019-01',
+        resumeProject: [{ beginDate: null,
           cardNo: '',
           createdTime: '',
           endDate: '',
@@ -391,7 +392,7 @@ export default {
           teamSize: '' }],
         resumeQualification: [{ cardNo: '',
           createdTime: '',
-          getDate: '',
+          getDate: null,
           id: 42654,
           modifiedTime: '',
           qualificationLevel: '',
@@ -407,7 +408,7 @@ export default {
           rewardLevel: '',
           rewardName: '',
           rewardORG: '' }],
-        resumeSchoolActivities: [{ beginDate: '',
+        resumeSchoolActivities: [{ beginDate: null,
           cardNo: '',
           createdTime: '',
           endDate: '',
@@ -422,165 +423,137 @@ export default {
   },
   computed: {
     eduEmpty () {
-      if (this.isNewResume === '0') {
-        if (this.EmployeeInfo.resumeEducation.length !== 0) {
-          if (this.EmployeeInfo.resumeEducation[0].beginDate.length !== 0) {
-            return true
-          } else {
-            return false
-          }
+      // if (this.isNewResume === '0') {
+      if (this.EmployeeInfo.resumeEducation && this.EmployeeInfo.resumeEducation.length !== 0) {
+        if (this.EmployeeInfo.resumeEducation[0].beginDate && this.EmployeeInfo.resumeEducation[0].beginDate.length !== 0) {
+          return true
         } else {
           return false
         }
       } else {
-        if (this.EmployeeInfo.resumeEducation[0].beginDate) {
-          if (this.EmployeeInfo.resumeEducation[0].beginDate.length !== 0) {
-            return true
-          } else {
-            return false
-          }
-        } else {
-          return false
-        }
+        return false
       }
+      // } else {
+      //   if (this.EmployeeInfo.resumeEducation[0].beginDate && this.EmployeeInfo.resumeEducation[0].beginDate.length !== 0) {
+      //     return true
+      //   } else {
+      //     return false
+      //   }
+      // }
     },
     internshipEmpty () {
-      if (this.isNewResume === '0') {
-        if (this.EmployeeInfo.resumeInternship.length !== 0) {
-          if (this.EmployeeInfo.resumeInternship[0].beginDate.length !== 0) {
-            return true
-          } else {
-            return false
-          }
+      // if (this.isNewResume === '0') {
+      if (this.EmployeeInfo.resumeInternship && this.EmployeeInfo.resumeInternship.length !== 0) {
+        if (this.EmployeeInfo.resumeInternship[0].beginDate && this.EmployeeInfo.resumeInternship[0].beginDate.length !== 0) {
+          return true
         } else {
           return false
         }
       } else {
-        if (this.EmployeeInfo.resumeInternship[0].beginDate) {
-          if (this.EmployeeInfo.resumeInternship[0].beginDate.length !== 0) {
-            return true
-          } else {
-            return false
-          }
-        } else {
-          return false
-        }
+        return false
       }
+      // } else {
+      //   if (this.EmployeeInfo.resumeInternship[0].beginDate && this.EmployeeInfo.resumeInternship[0].beginDate.length !== 0) {
+      //     return true
+      //   } else {
+      //     return false
+      //   }
+      // }
     },
     qualificationEmpty () {
-      if (this.isNewResume === '0') {
-        if (this.EmployeeInfo.resumeQualification.length !== 0) {
-          if (this.EmployeeInfo.resumeQualification[0].getDate.length !== 0) {
-            return true
-          } else {
-            return false
-          }
+      // if (this.isNewResume === '0') {
+      if (this.EmployeeInfo.resumeQualification && this.EmployeeInfo.resumeQualification.length !== 0) {
+        if (this.EmployeeInfo.resumeQualification[0].getDate && this.EmployeeInfo.resumeQualification[0].getDate.length !== 0) {
+          return true
         } else {
           return false
         }
       } else {
-        if (this.EmployeeInfo.resumeQualification[0].getDate) {
-          if (this.EmployeeInfo.resumeQualification[0].getDate.length !== 0) {
-            return true
-          } else {
-            return false
-          }
-        } else {
-          return false
-        }
+        return false
       }
+      // } else {
+      //   if (this.EmployeeInfo.resumeQualification[0].getDate && this.EmployeeInfo.resumeQualification[0].getDate.length !== 0) {
+      //     return true
+      //   } else {
+      //     return false
+      //   }
+      // }
     },
     familyEmpty () {
-      if (this.isNewResume === '0') {
-        if (this.EmployeeInfo.resumeFamily.length !== 0) {
-          if (this.EmployeeInfo.resumeFamily[0].name.length !== 0) {
-            return true
-          } else {
-            return false
-          }
+      // if (this.isNewResume === '0') {
+      if (this.EmployeeInfo.resumeFamily && this.EmployeeInfo.resumeFamily.length !== 0) {
+        if (this.EmployeeInfo.resumeFamily[0].name && this.EmployeeInfo.resumeFamily[0].name.length !== 0) {
+          return true
         } else {
           return false
         }
       } else {
-        if (this.EmployeeInfo.resumeFamily[0].name) {
-          if (this.EmployeeInfo.resumeFamily[0].name.length !== 0) {
-            return true
-          } else {
-            return false
-          }
-        } else {
-          return false
-        }
+        return false
       }
+      // } else {
+      //   if (this.EmployeeInfo.resumeFamily[0].name && this.EmployeeInfo.resumeFamily[0].name.length !== 0) {
+      //     return true
+      //   } else {
+      //     return false
+      //   }
+      // }
     },
     rewardEmpty () {
-      if (this.isNewResume === '0') {
-        if (this.EmployeeInfo.resumeReward.length !== 0) {
-          if (this.EmployeeInfo.resumeReward[0].rewardDate.length !== 0) {
-            return true
-          } else {
-            return false
-          }
+      // if (this.isNewResume === '0') {
+      if (this.EmployeeInfo.resumeReward && this.EmployeeInfo.resumeReward.length !== 0) {
+        if (this.EmployeeInfo.resumeReward[0].rewardDate && this.EmployeeInfo.resumeReward[0].rewardDate.length !== 0) {
+          return true
         } else {
           return false
         }
       } else {
-        if (this.EmployeeInfo.resumeReward[0].rewardDate) {
-          if (this.EmployeeInfo.resumeReward[0].rewardDate.length !== 0) {
-            return true
-          } else {
-            return false
-          }
-        } else {
-          return false
-        }
+        return false
       }
+      // } else {
+      //   if (this.EmployeeInfo.resumeReward[0].rewardDate && this.EmployeeInfo.resumeReward[0].rewardDate.length !== 0) {
+      //     return true
+      //   } else {
+      //     return false
+      //   }
+      // }
     },
     projectEmpty () {
-      if (this.isNewResume === '0') {
-        if (this.EmployeeInfo.resumeProject.length !== 0) {
-          if (this.EmployeeInfo.resumeProject[0].projectName.length !== 0) {
-            return true
-          } else {
-            return false
-          }
+      // if (this.isNewResume === '0') {
+      if (this.EmployeeInfo.resumeProject && this.EmployeeInfo.resumeProject.length !== 0) {
+        if (this.EmployeeInfo.resumeProject[0].projectName && this.EmployeeInfo.resumeProject[0].projectName.length !== 0) {
+          return true
         } else {
           return false
         }
       } else {
-        if (this.EmployeeInfo.resumeProject[0].projectName) {
-          if (this.EmployeeInfo.resumeProject[0].projectName.length !== 0) {
-            return true
-          } else {
-            return false
-          }
-        } else {
-          return false
-        }
+        return false
       }
+      // } else {
+      //   if (this.EmployeeInfo.resumeProject[0].projectName && this.EmployeeInfo.resumeProject[0].projectName.length !== 0) {
+      //     return true
+      //   } else {
+      //     return false
+      //   }
+      // }
     },
     schoolActivitiesEmpty () {
-      if (this.isNewResume === '0') {
-        if (this.EmployeeInfo.resumeSchoolActivities.length !== 0) {
-          if (this.EmployeeInfo.resumeSchoolActivities[0].beginDate.length !== 0) {
-            return true
-          } else {
-            return false
-          }
+      // if (this.isNewResume === '0') {
+      if (this.EmployeeInfo.resumeSchoolActivities && this.EmployeeInfo.resumeSchoolActivities.length !== 0) {
+        if (this.EmployeeInfo.resumeSchoolActivities[0].beginDate && this.EmployeeInfo.resumeSchoolActivities[0].beginDate.length !== 0) {
+          return true
         } else {
           return false
         }
       } else {
-        if (this.EmployeeInfo.resumeSchoolActivities[0].beginDate) {
-          if (this.EmployeeInfo.resumeSchoolActivities[0].beginDate.length !== 0) {
-            return true
-          } else {
-            return false
-          }
-        } else {
-          return false
-        }
+        return false
       }
+      // } else {
+      //   if (this.EmployeeInfo.resumeSchoolActivities[0].beginDate && this.EmployeeInfo.resumeSchoolActivities[0].beginDate.length !== 0) {
+      //     return true
+      //   } else {
+      //     return false
+      //   }
+      // }
     }
   },
   filters: {

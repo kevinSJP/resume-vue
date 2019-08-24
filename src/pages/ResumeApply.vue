@@ -54,8 +54,8 @@ export default {
   data () {
     return {
       EmployeeInfo: {
-        jobApply: '信息化',
-        jobApply2: '信息化'
+        jobApply: '',
+        jobApply2: ''
       },
       hasError: ''
     }

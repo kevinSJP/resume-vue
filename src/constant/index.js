@@ -42,8 +42,6 @@ export const awardType = [
   { value: '2', label: '省部级' },
   { value: '3', label: '市厅级' },
   { value: '4', label: '县处级' },
-  { value: '5', label: '集团级' },
-  { value: '6', label: '下属公司/部门级' },
   { value: '9', label: '其他' }]
 // 学习方式
 export const studyStyle = [

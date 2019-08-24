@@ -46,14 +46,14 @@ export default {
   data () {
     return {
       EmployeeInfo: {
-        resumeOtherInfo: { cardNo: '411102199009160075',
-          createdTime: '2018-10-14',
+        resumeOtherInfo: { cardNo: '',
+          createdTime: '',
           id: 0,
-          isFamilymember: '0',
+          isFamilymember: '',
           isFamilymemberName: null,
-          isPostDeployment: '0',
-          modifiedTime: '2019-06-05',
-          remark: '123' }
+          isPostDeployment: '',
+          modifiedTime: '',
+          remark: '' }
       },
       whetherType,
       hasError: ''

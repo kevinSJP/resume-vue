@@ -100,24 +100,24 @@ export default {
     return {
       EmployeeInfo: {
         resumeNatural: { age: null,
-          birthDate: '1990-07-09',
-          cardNo: '411102199009160075',
-          cardType: '1',
-          currentPlace: '1',
-          height: '175',
-          hukouPlace: '110000',
-          maritalStatus: '1',
-          name: '邵金鹏',
-          nativePlace: '110000',
-          photoId: '411102199009160075',
-          polity: '12',
-          sex: '1',
-          weight: '65' },
+          birthDate: '',
+          cardNo: '',
+          cardType: '',
+          currentPlace: '',
+          height: '',
+          hukouPlace: '',
+          maritalStatus: '',
+          name: '',
+          nativePlace: '',
+          photoId: '',
+          polity: '',
+          sex: '',
+          weight: '' },
         resumeCommunication: { address: null,
-          cardNo: '411102199009160075',
-          createdTime: '2018-10-14',
-          email: '1@2',
-          tel: '13222222222' }
+          cardNo: '',
+          createdTime: '',
+          email: '',
+          tel: '' }
       },
       cardType,
       areaType,
@@ -154,7 +154,7 @@ export default {
       if (this.EmployeeInfo.resumeNatural.cardNo) {
         let i = (parseInt(this.EmployeeInfo.resumeNatural.cardNo.substr(16, 1)) % 2)
         if (i === 0) { i = '2' } else { i = '1' }
-        this.EmployeeInfo.resumeNatural.birthDate = i
+        this.EmployeeInfo.resumeNatural.sex = i
       }
       putResume(modifyEmployeeInfo(this.EmployeeInfo))
         .then(res => {
