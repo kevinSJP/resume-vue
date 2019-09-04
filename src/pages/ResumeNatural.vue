@@ -156,6 +156,8 @@ export default {
         if (i === 0) { i = '2' } else { i = '1' }
         this.EmployeeInfo.resumeNatural.sex = i
       }
+      console.log(this.EmployeeInfo)
+      console.log(modifyEmployeeInfo(this.EmployeeInfo))
       putResume(modifyEmployeeInfo(this.EmployeeInfo))
         .then(res => {
           notiSuccess()

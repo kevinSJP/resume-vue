@@ -8,10 +8,16 @@ export const modifyEmployeeInfo = (value) => {
     Vue.delete(value, 'id')
     Vue.delete(value, 'createdTime')
     Vue.delete(value, 'modifiedTime')
+    value.editStatus = 'editStatus'
+    value.applyStatus = 'applyStatus'
+    value.employStatus = 'employStatus'
+    value.integrity = 'integrity'
+    value.name = value.resumeNatural.name
     if (value.resumeNatural) {
       Vue.delete(value.resumeNatural, 'id')
       Vue.delete(value.resumeNatural, 'createdTime')
       Vue.delete(value.resumeNatural, 'modifiedTime')
+      value.resumeNatural.cardType = '1'
     }
     if (value.resumeOtherInfo) {
       Vue.delete(value.resumeOtherInfo, 'id')
@@ -29,6 +35,9 @@ export const modifyEmployeeInfo = (value) => {
         Vue.delete(v, 'createdTime')
         Vue.delete(v, 'modifiedTime')
       })
+      if (!value.resumeEducation[0].beginDate) {
+        Vue.delete(value.resumeEducation, 0)
+      }
     }
     if (value.resumeFamily) {
       if (!isEmptyObject(value.resumeFamily)) {
@@ -37,6 +46,9 @@ export const modifyEmployeeInfo = (value) => {
           Vue.delete(v, 'createdTime')
           Vue.delete(v, 'modifiedTime')
         })
+        if (!value.resumeFamily[0].name) {
+          Vue.delete(value.resumeFamily, 0)
+        }
       }
     }
     if (value.resumeInternship) {
@@ -46,6 +58,9 @@ export const modifyEmployeeInfo = (value) => {
           Vue.delete(v, 'createdTime')
           Vue.delete(v, 'modifiedTime')
         })
+        if (!value.resumeInternship[0].beginDate) {
+          Vue.delete(value.resumeInternship, 0)
+        }
       }
     }
     if (value.resumeLanguage) {
@@ -55,6 +70,9 @@ export const modifyEmployeeInfo = (value) => {
           Vue.delete(v, 'createdTime')
           Vue.delete(v, 'modifiedTime')
         })
+        if (!value.resumeLanguage[0].name) {
+          Vue.delete(value.resumeLanguage, 0)
+        }
       }
     }
     if (value.resumeProject) {
@@ -64,6 +82,9 @@ export const modifyEmployeeInfo = (value) => {
           Vue.delete(v, 'createdTime')
           Vue.delete(v, 'modifiedTime')
         })
+        if (!value.resumeProject[0].beginDate) {
+          Vue.delete(value.resumeProject, 0)
+        }
       }
     }
     if (value.resumeQualification) {
@@ -73,6 +94,9 @@ export const modifyEmployeeInfo = (value) => {
           Vue.delete(v, 'createdTime')
           Vue.delete(v, 'modifiedTime')
         })
+        if (!value.resumeQualification[0].getDate) {
+          Vue.delete(value.resumeQualification, 0)
+        }
       }
     }
     if (value.resumeReward) {
@@ -82,6 +106,9 @@ export const modifyEmployeeInfo = (value) => {
           Vue.delete(v, 'createdTime')
           Vue.delete(v, 'modifiedTime')
         })
+        if (!value.resumeReward[0].rewardDate) {
+          Vue.delete(value.resumeReward, 0)
+        }
       }
     }
     if (value.resumeSchoolActivities) {
@@ -91,6 +118,9 @@ export const modifyEmployeeInfo = (value) => {
           Vue.delete(v, 'createdTime')
           Vue.delete(v, 'modifiedTime')
         })
+        if (!value.resumeSchoolActivities[0].beginDate) {
+          Vue.delete(value.resumeSchoolActivities, 0)
+        }
       }
     }
   }

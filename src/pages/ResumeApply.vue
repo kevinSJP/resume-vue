@@ -11,7 +11,7 @@
       spellcheck="false"
     >
       <q-input ref="jobApply" clearable  v-model="EmployeeInfo.jobApply" label="期望职位*" lazy-rules :rules="[val => !!val || '必填']" />
-      <q-input ref="jobApply2" clearable  v-model="EmployeeInfo.jobApply2" label="求职意向*" lazy-rules :rules="[val => !!val || '必填']" />
+      <q-input ref="jobApply2" clearable  v-model="EmployeeInfo.jobApply2" label="求职意向(如应届生请标明校招)*" lazy-rules :rules="[val => !!val || '必填']" />
       <!--<q-uploader-->
         <!--url="http://localhost:8083/file/upload/avatar"-->
         <!--label="上传照片 "-->
@@ -55,7 +55,13 @@ export default {
     return {
       EmployeeInfo: {
         jobApply: '',
-        jobApply2: ''
+        jobApply2: '',
+        applyStatus: 'applyStatus',
+        editStatus: 'editStatus',
+        employStatus: 'employStatus',
+        hasResume: 0,
+        integrity: 'integrity',
+        name: ''
       },
       hasError: ''
     }

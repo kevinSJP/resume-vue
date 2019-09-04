@@ -72,12 +72,11 @@ export const cerType = [
   { value: '4', label: '高中' }]
 // 学位
 export const degreeType = [
-  { value: '11', label: '博士研究生' },
-  { value: '12', label: '硕士研究生' },
-  { value: '21', label: '大学本科' },
-  { value: '31', label: '中专' },
-  { value: '32', label: '大专' },
-  { value: '4', label: '高中' }]
+  { value: '1', label: '名誉博士' },
+  { value: '2', label: '博士' },
+  { value: '3', label: '硕士' },
+  { value: '4', label: '学士' },
+  { value: '10', label: '其他' }]
 // 城市区划
 export const areaType = [
   { value: '110000', label: '北京市' },
