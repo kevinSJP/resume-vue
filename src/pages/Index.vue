@@ -1,5 +1,8 @@
 <template>
   <q-page class="q-pa-md row items-start q-gutter-md">
+    <q-btn flat glossy unelevated  style="margin: 0 auto ;width: 100%"  text-color="primary">
+        请依次填写各项信息完成简历投递
+    </q-btn>
     <!--申请职位-->
     <q-card inline class="my-card bg-grey-1">
       <q-card-section  class="q-py-none">
@@ -116,7 +119,7 @@
         <div class="row items-center no-wrap">
           <q-icon class="avatar q-pa-xs" name="img:statics/icons/qualify.svg" />
           <div class="col">
-            <div class="text-h6">资格证书</div>
+            <div class="text-h6">等级证书</div>
           </div>
           <div class="col-auto">
             <q-btn color="grey-7" round flat icon="edit" @click="goQualification"></q-btn>
@@ -271,13 +274,14 @@
         </table>
       </q-card-section>
     </q-card>
+    <q-btn color="primary" icon="save" icon-right="send" label=" 提   交   申   请 " @click="submitResume" style="width: 100%"/>
   </q-page>
 </template>
 
 <script>
 
 import { whetherType, cardType, genderType, polityType, maritalType, areaType, cerType, familyType, awardType } from '../constant/index'
-import { hasResume, getResume, getUser } from '../common/index'
+import { modifyEmployeeInfo, subSuccess, subFail, lackInfo, hasResume, getResume, getUser, putResume } from '../common/index'
 
 export default {
   name: 'resume',
@@ -752,6 +756,28 @@ export default {
           }).catch((err) => { return err })
         }
       }).catch((err) => { return err })
+    },
+    submitResume () {
+      if (this.EmployeeInfo.jobApply && this.EmployeeInfo.jobApply.length !== 0 &&
+        this.EmployeeInfo.resumeNatural.polity && this.EmployeeInfo.resumeNatural.polity.length !== 0 &&
+        this.EmployeeInfo.resumeEducation && this.EmployeeInfo.resumeEducation.length !== 0) {
+        console.log(modifyEmployeeInfo(this.EmployeeInfo))
+        this.EmployeeInfo.hasSubmitted = '1'
+        putResume(modifyEmployeeInfo(this.EmployeeInfo))
+          .then(res => {
+            subSuccess()
+            return res
+          })
+          .catch((err) => {
+            subFail()
+            return err
+          })
+      } else {
+        console.log(this.EmployeeInfo)
+        console.log(this.EmployeeInfo.jobApply)
+        console.log(this.EmployeeInfo.jobApply.length)
+        lackInfo()
+      }
     }
   }
 }

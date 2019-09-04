@@ -123,6 +123,30 @@ export const modifyEmployeeInfo = (value) => {
         }
       }
     }
+    if (value.resumeAttachment) {
+      if (!isEmptyObject(value.resumeAttachment)) {
+        value.resumeAttachment.forEach(v => {
+          Vue.delete(v, 'id')
+          Vue.delete(v, 'createdTime')
+          Vue.delete(v, 'modifiedTime')
+        })
+        if (!value.resumeAttachment[0].type) {
+          Vue.delete(value.resumeAttachment, 0)
+        }
+      }
+    }
+    if (value.resumeLanguage) {
+      if (!isEmptyObject(value.resumeLanguage)) {
+        value.resumeLanguage.forEach(v => {
+          if (v.id) { Vue.delete(v, 'id') }
+          if (v.createdTime) { Vue.delete(v, 'createdTime') }
+          if (v.modifiedTime) { Vue.delete(v, 'modifiedTime') }
+        })
+        if (!value.resumeLanguage[0].languageType) {
+          Vue.delete(value.resumeLanguage, 0)
+        }
+      }
+    }
   }
 
   // if (!isEmptyObject(value.resumeAttachment)) {
@@ -143,8 +167,30 @@ function isEmptyObject (obj) {
   return true
 }
 
-/* 提示成功 */
+/* 保存成功 */
 export const notiSuccess = () => {
+  Notify.create({
+    color: 'green-4',
+    textColor: 'white',
+    position: 'top',
+    icon: 'fas fa-check-circle',
+    message: '保存成功'
+  })
+}
+
+/* 保存失败 */
+export const notiFail = () => {
+  Notify.create({
+    color: 'red-5',
+    textColor: 'white',
+    position: 'top',
+    icon: 'fas fa-exclamation-triangle',
+    message: '保存失败'
+  })
+}
+
+/* 提交成功 */
+export const subSuccess = () => {
   Notify.create({
     color: 'green-4',
     textColor: 'white',
@@ -154,8 +200,8 @@ export const notiSuccess = () => {
   })
 }
 
-/* 提示失败 */
-export const notiFail = () => {
+/* 提交失败 */
+export const subFail = () => {
   Notify.create({
     color: 'red-5',
     textColor: 'white',
@@ -173,6 +219,17 @@ export const overMax = () => {
     position: 'top',
     icon: 'fas fa-exclamation-triangle',
     message: '文件大于1M，请压缩后上传'
+  })
+}
+
+/* 信息不完整 */
+export const lackInfo = () => {
+  Notify.create({
+    color: 'red-5',
+    textColor: 'white',
+    position: 'top',
+    icon: 'fas fa-exclamation-triangle',
+    message: '填写了职位信息、基本信息、教育信息后才可提交申请'
   })
 }
 

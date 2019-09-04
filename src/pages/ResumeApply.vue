@@ -10,8 +10,16 @@
       autocomplete="off"
       spellcheck="false"
     >
+      <q-badge color="grey-6">
+        校园招聘请在期望职位中填写管培职位类别。<br>
+        社会招聘请在期望职位中填写具体职位名称。
+      </q-badge>
       <q-input ref="jobApply" clearable  v-model="EmployeeInfo.jobApply" label="期望职位*" lazy-rules :rules="[val => !!val || '必填']" />
-      <q-input ref="jobApply2" clearable  v-model="EmployeeInfo.jobApply2" label="求职意向(如应届生请标明校招)*" lazy-rules :rules="[val => !!val || '必填']" />
+      <q-badge color="grey-6">
+        在求职意向中填写具体期望的工作内容。<br>
+        如校招请注明应届生。
+      </q-badge>
+      <q-input ref="jobApply2" clearable  v-model="EmployeeInfo.jobApply2" label="求职意向*" lazy-rules :rules="[val => !!val || '必填']" />
       <!--<q-uploader-->
         <!--url="http://localhost:8083/file/upload/avatar"-->
         <!--label="上传照片 "-->
