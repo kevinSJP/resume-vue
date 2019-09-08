@@ -27,7 +27,7 @@ module.exports = function (ctx) {
 
     framework: {
       // iconSet: 'ionicons-v4',
-      // lang: 'de', // Quasar language
+      lang: 'zh-hans', // Quasar language
 
       // all: true, // --- includes everything; for dev only!
 
@@ -50,6 +50,7 @@ module.exports = function (ctx) {
         'QCardSection',
         'QCardActions',
         'QSeparator',
+        'QSpace',
         'QInput',
         'QSelect',
         'QForm',
@@ -57,7 +58,14 @@ module.exports = function (ctx) {
         'QPopupProxy',
         'QAvatar',
         'QUploader',
-        'QBadge'
+        'QBadge',
+        'QSplitter',
+        'QSlider',
+        'QTable',
+        'QTh',
+        'QTr',
+        'QTd',
+        'QDialog'
       ],
 
       directives: [

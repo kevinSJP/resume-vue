@@ -18,6 +18,7 @@ const routes = [
       { path: 'otherInfo', name: 'otherInfo', component: () => import('pages/ResumeOtherInfo.vue') }
     ]
   },
+  { path: '/queryResume', name: 'queryResume', component: () => import('pages/QueryResume.vue') },
   { path: '/', redirect: '/quasarResume' }
 ]
 
