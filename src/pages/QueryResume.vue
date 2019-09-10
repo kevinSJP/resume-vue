@@ -21,9 +21,9 @@
               <div class="q-pa-md">
                 <div class="text-h4 q-mb-md">查询条件</div>
                 <div class="q-pa-md">
-                  <q-btn color="primary" label="查询" style="width: 100%"/>
-                  <q-input filled clearable v-model="ResName" label="姓名(如多个以英文,分隔)" />
-                  <q-select  filled v-model="ResCertificate" multiple :options="cerType" label="学历"  emit-value map-options>
+                  <q-btn color="primary" label="查询" style="width: 100%" @click="queryResumeList"/>
+                  <q-input filled clearable v-model="ResName" label="姓名(如多个以空格分隔)" />
+                  <q-select  filled v-model="ResCertificate" multiple :options="cerTypeName" label="学历" emit-value map-options  >
                     <template v-if="ResCertificate" v-slot:append>
                       <q-icon name="cancel" @click.stop="ResCertificate = null" class="cursor-pointer" />
                     </template>
@@ -47,9 +47,9 @@
                       <q-icon name="cancel" @click.stop="ResPolity = null" class="cursor-pointer" />
                     </template>
                   </q-select>
-                  <q-input filled clearable v-model="ResCollege" label="学校(如多个以英文,分隔)" />
-                  <q-input filled clearable v-model="ResSpecialty" label="专业(如多个以英文,分隔)" />
-                  <q-select filled v-model="ResSpecial" multiple :options="SpecialType" label="专业类别"  emit-value map-options>
+                  <q-input filled clearable v-model="ResCollege" label="学校(如多个以空格分隔)" />
+                  <q-input filled clearable v-model="ResSpecialty" label="专业(如多个以空格分隔)" />
+                  <q-select filled v-model="ResSpecial" multiple :options="SpecialTypeName" label="专业类别"  emit-value map-options>
                     <template v-if="ResSpecial" v-slot:append>
                       <q-icon name="cancel" @click.stop="ResSpecial = null" class="cursor-pointer" />
                     </template>
@@ -58,9 +58,9 @@
                      {{ ResDay }} 天内更新简历
                   </q-badge>
                   <q-slider v-model="ResDay" label :min="0" :max="90" class="on-right" style="width: 80%"/>
-                  <q-badge color="secondary" multi-line>
-                    Model: "{{ ResDay }}"
-                  </q-badge>
+                  <!--<q-badge color="secondary" multi-line>-->
+                    <!--Model: "{{ ResCertificate }}"-->
+                  <!--</q-badge>-->
                 </div>
               </div>
             </template>
@@ -74,7 +74,7 @@
                     title="人员列表"
                     :data="data"
                     :columns="columns"
-                    row-key="id"
+                    row-key="cardNo"
                     :filter="filter"
                     :loading="loading"
                     selection="single"
@@ -103,9 +103,9 @@
                     </template>
 
                   </q-table>
-                  <div class="q-mt-md">
-                    Selected: {{ JSON.stringify(selected) }}
-                  </div>
+                  <!--<div class="q-mt-md">-->
+                    <!--Selected: {{ JSON.stringify(selected) }}-->
+                  <!--</div>-->
                 </div>
               </div>
             </template>
@@ -273,12 +273,16 @@
 import Vue from 'vue'
 import downloadExcel from 'vue-json-excel'
 import { whetherType, cardType, genderType, polityType, maritalType, areaType, cerType, familyType, awardType, SpecialType } from '../constant/index'
+import { getResumeList, getResumeByNo } from '../common/index'
 
 Vue.component('downloadExcel', downloadExcel)
 
 export default {
   name: 'queryResume',
   created () {
+  },
+  mounted () {
+    this.queryResumeList()
   },
   data () {
     return {
@@ -291,6 +295,18 @@ export default {
       ResSpecialty: null,
       ResSpecial: null,
       ResDay: 30,
+      condition: {
+        ResName: null,
+        ResGender: null,
+        ResCertificate: null,
+        ResBirthday: null,
+        ResPolity: null,
+        ResCollege: null,
+        ResSpecialty: null,
+        ResSpecial: null,
+        ResDay: 30
+      },
+
       cerType,
       genderType,
       polityType,
@@ -304,7 +320,7 @@ export default {
       filter: '',
       columns: [
         {
-          name: 'id',
+          name: 'cardNo',
           required: true,
           label: '姓名',
           align: 'center',
@@ -319,7 +335,7 @@ export default {
       ],
       data: [
         {
-          id: '110101198710173015',
+          cardNo: '411102199009160075',
           empName: '张渊',
           empGender: '男',
           empBirthday: '1987-10-17',
@@ -330,7 +346,7 @@ export default {
           empInter: '农业银行海淀东区支行-阜石路二级支行-网点副行长（主持工作）,农业银行海淀东区支行-计财部-副经理,农业银行海淀东区支行-计财部-副经理,农业银行海淀东区支行-支行营业部-职员'
         },
         {
-          id: '11010119931017251X',
+          cardNo: '11010119931017251X',
           empName: '厚德曜',
           empGender: '男',
           empBirthday: '1993-10-17',
@@ -341,7 +357,7 @@ export default {
           empInter: '中国国际工程咨询有限公司-资源与环境业务部-项目经理助理'
         },
         {
-          id: '110101199403079517',
+          cardNo: '110101199403079517',
           empName: '张翰',
           empGender: '男',
           empBirthday: '1999-01-01',
@@ -358,7 +374,7 @@ export default {
         '性别': 'empGender',
         '生日': 'phone.mobile',
         '身份证号': {
-          field: 'id',
+          field: 'cardNo',
           callback: (value) => {
             return `'  ${value}`
           }
@@ -508,9 +524,10 @@ export default {
       }
     }
   },
+  watch: {
+  },
   computed: {
     eduEmpty () {
-      // if (this.isNewResume === '0') {
       if (this.EmployeeInfo.resumeEducation && this.EmployeeInfo.resumeEducation.length !== 0) {
         if (this.EmployeeInfo.resumeEducation[0].beginDate && this.EmployeeInfo.resumeEducation[0].beginDate.length !== 0) {
           return true
@@ -520,16 +537,8 @@ export default {
       } else {
         return false
       }
-      // } else {
-      //   if (this.EmployeeInfo.resumeEducation[0].beginDate && this.EmployeeInfo.resumeEducation[0].beginDate.length !== 0) {
-      //     return true
-      //   } else {
-      //     return false
-      //   }
-      // }
     },
     internshipEmpty () {
-      // if (this.isNewResume === '0') {
       if (this.EmployeeInfo.resumeInternship && this.EmployeeInfo.resumeInternship.length !== 0) {
         if (this.EmployeeInfo.resumeInternship[0].beginDate && this.EmployeeInfo.resumeInternship[0].beginDate.length !== 0) {
           return true
@@ -539,16 +548,8 @@ export default {
       } else {
         return false
       }
-      // } else {
-      //   if (this.EmployeeInfo.resumeInternship[0].beginDate && this.EmployeeInfo.resumeInternship[0].beginDate.length !== 0) {
-      //     return true
-      //   } else {
-      //     return false
-      //   }
-      // }
     },
     qualificationEmpty () {
-      // if (this.isNewResume === '0') {
       if (this.EmployeeInfo.resumeQualification && this.EmployeeInfo.resumeQualification.length !== 0) {
         if (this.EmployeeInfo.resumeQualification[0].getDate && this.EmployeeInfo.resumeQualification[0].getDate.length !== 0) {
           return true
@@ -558,16 +559,8 @@ export default {
       } else {
         return false
       }
-      // } else {
-      //   if (this.EmployeeInfo.resumeQualification[0].getDate && this.EmployeeInfo.resumeQualification[0].getDate.length !== 0) {
-      //     return true
-      //   } else {
-      //     return false
-      //   }
-      // }
     },
     familyEmpty () {
-      // if (this.isNewResume === '0') {
       if (this.EmployeeInfo.resumeFamily && this.EmployeeInfo.resumeFamily.length !== 0) {
         if (this.EmployeeInfo.resumeFamily[0].name && this.EmployeeInfo.resumeFamily[0].name.length !== 0) {
           return true
@@ -577,16 +570,8 @@ export default {
       } else {
         return false
       }
-      // } else {
-      //   if (this.EmployeeInfo.resumeFamily[0].name && this.EmployeeInfo.resumeFamily[0].name.length !== 0) {
-      //     return true
-      //   } else {
-      //     return false
-      //   }
-      // }
     },
     rewardEmpty () {
-      // if (this.isNewResume === '0') {
       if (this.EmployeeInfo.resumeReward && this.EmployeeInfo.resumeReward.length !== 0) {
         if (this.EmployeeInfo.resumeReward[0].rewardDate && this.EmployeeInfo.resumeReward[0].rewardDate.length !== 0) {
           return true
@@ -596,16 +581,8 @@ export default {
       } else {
         return false
       }
-      // } else {
-      //   if (this.EmployeeInfo.resumeReward[0].rewardDate && this.EmployeeInfo.resumeReward[0].rewardDate.length !== 0) {
-      //     return true
-      //   } else {
-      //     return false
-      //   }
-      // }
     },
     projectEmpty () {
-      // if (this.isNewResume === '0') {
       if (this.EmployeeInfo.resumeProject && this.EmployeeInfo.resumeProject.length !== 0) {
         if (this.EmployeeInfo.resumeProject[0].projectName && this.EmployeeInfo.resumeProject[0].projectName.length !== 0) {
           return true
@@ -615,16 +592,8 @@ export default {
       } else {
         return false
       }
-      // } else {
-      //   if (this.EmployeeInfo.resumeProject[0].projectName && this.EmployeeInfo.resumeProject[0].projectName.length !== 0) {
-      //     return true
-      //   } else {
-      //     return false
-      //   }
-      // }
     },
     schoolActivitiesEmpty () {
-      // if (this.isNewResume === '0') {
       if (this.EmployeeInfo.resumeSchoolActivities && this.EmployeeInfo.resumeSchoolActivities.length !== 0) {
         if (this.EmployeeInfo.resumeSchoolActivities[0].beginDate && this.EmployeeInfo.resumeSchoolActivities[0].beginDate.length !== 0) {
           return true
@@ -634,19 +603,21 @@ export default {
       } else {
         return false
       }
-      // } else {
-      //   if (this.EmployeeInfo.resumeSchoolActivities[0].beginDate && this.EmployeeInfo.resumeSchoolActivities[0].beginDate.length !== 0) {
-      //     return true
-      //   } else {
-      //     return false
-      //   }
-      // }
+    },
+    cerTypeName () {
+      let cerTypeName = []
+      cerType.forEach(v => { cerTypeName.push(v.label) })
+      return cerTypeName
+    },
+    SpecialTypeName () {
+      let SpecialTypeName = []
+      SpecialType.forEach(v => { SpecialTypeName.push(v.label) })
+      return SpecialTypeName
     }
   },
   filters: {
     whetherFilter (value) {
       if (value) {
-        console.log(whetherType.find(item => item.value === value))
         if (whetherType.find(item => item.value === value)) {
           return whetherType.find(item => item.value === value).label
         }
@@ -728,7 +699,7 @@ export default {
     removeRow () {
       this.loading = true
       for (let i = this.data.length - 1; i >= 0; i--) {
-        if (this.data[i].id === this.selected[0].id) {
+        if (this.data[i].cardNo === this.selected[0].cardNo) {
           // this.data.splice(i, 1)
           this.data = [...this.data.slice(0, i), ...this.data.slice(i + 1)]
         }
@@ -738,8 +709,54 @@ export default {
     iconMethod (value) {
       return 'img:statics/icons/' + value + '.ico'
     },
+    queryResumeList () {
+      let formData = new FormData()
+      if (this.ResName) {
+        formData.append('ResName', '(' + this.ResName.trim().replace(/\s+|&nbsp;/ig, '|') + ')')
+      }
+      if (this.ResCertificate) {
+        formData.append('ResCertificate', JSON.stringify(this.ResCertificate).replace(/","/g, '|').replace('["', '(').replace('"]', ')'))
+      }
+      if (this.ResGender) {
+        formData.append('ResGender', JSON.stringify(this.ResGender).replace(/","/g, '|').replace('["', '(').replace('"]', ')'))
+      }
+      if (this.ResBirthday) {
+        formData.append('ResBirthday', this.ResBirthday.trim())
+      }
+      if (this.ResPolity) {
+        formData.append('ResPolity', JSON.stringify(this.ResPolity).replace(/","/g, '|').replace('["', '(').replace('"]', ')'))
+      }
+      if (this.ResCollege) {
+        formData.append('ResCollege', '(' + this.ResCollege.trim().replace(/\s+|&nbsp;/ig, '|') + ')')
+      }
+      if (this.ResSpecialty) {
+        formData.append('ResSpecialty', '(' + this.ResSpecialty.trim().replace(/\s+|&nbsp;/ig, '|') + ')')
+      }
+      if (this.ResSpecial) {
+        formData.append('ResSpecial', JSON.stringify(this.ResSpecial).replace(/","/g, '|').replace('["', '(').replace('"]', ')'))
+      }
+      formData.append('ResDay', this.ResDay)
+      getResumeList(formData)
+        .then(res => {
+          console.log(res.data.data)
+          console.log(this.data)
+          this.data = res.data.data
+          return res
+        })
+        .catch((err) => {
+          return err
+        })
+    },
     queryDetail () {
-      this.viewDetail = true
+      getResumeByNo(this.selected[0].cardNo)
+        .then(res => {
+          this.viewDetail = true
+          this.EmployeeInfo = res.data.data
+          return res
+        })
+        .catch((err) => {
+          return err
+        })
     }
   }
 }

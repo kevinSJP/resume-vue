@@ -257,3 +257,13 @@ export const putResume = (value) => {
 export const postFile = (value) => {
   return axiosInstance.post('/file/upload', value)
 }
+
+/* 发请求获取简历列表信息 */
+export const getResumeList = (value) => {
+  return axiosInstance.post('/queryResumeList', value)
+}
+
+/* 发请求获取指定简历信息 */
+export const getResumeByNo = (value) => {
+  return axiosInstance.get(`/queryResumeInfo/${value}`)
+}
