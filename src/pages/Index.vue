@@ -275,6 +275,35 @@
       </q-card-section>
     </q-card>
     <q-btn color="primary" icon="save" icon-right="send" label=" 提   交   申   请 " @click="submitResume" style="width: 100%"/>
+    <q-dialog v-model="alertMsg" >
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">职位申请承诺</div>
+        </q-card-section>
+
+        <q-card-section>
+            <p class=MsoNormal style='line-height:150%'><span style='font-size:12.0pt;line-height:150%;font-family:宋体'>尊敬的用户，您好：</span></p>
+            <p class=MsoNormal style='text-indent:24.0pt;line-height:150%'><span style='font-size:12.0pt;line-height:150%;font-family:宋体'>京投招聘系统是北京市基础设施投资有限公司（含全资及参控股公司，下文简称</span>
+              <span lang=EN-US style='font-size:12.0pt;line-height:150%;font-family:"Times New Roman","serif"'>“</span>
+              <span style='font-size:12.0pt;line-height:150%;font-family:宋体'>京投公司</span><span lang=EN-US style='font-size:12.0pt;line-height:150%;font-family:"Times New Roman","serif"'>”</span>
+              <span style='font-size:12.0pt;line-height:150%;font-family:宋体'>）在全国范围内使用，进行招聘活动的招聘工具。您在该招聘系统上输入的个人数据仅用于人员招聘。</span></p>
+            <p class=MsoNormal style='line-height:150%'><span style='font-size:12.0pt;
+line-height:150%;font-family:宋体'>请应聘者做以下承诺：</span></p>
+            <p class=MsoNormal style='text-indent:24.0pt;line-height:150%'><span  lang=EN-US style='font-size:12.0pt;line-height:150%;font-family:"Times New Roman","serif"'>1</span>
+              <span  style='font-size:12.0pt;line-height:150%;font-family:宋体'>、我保证所填写表格的每一项内容及所提供的个人信息的真实性，并愿意接受京投公司或其委托的合法机构对上述所有信息调查确认。如有作假行为，愿接受京投公司的相关处理以及取消本人的录用资格。</span>
+              <span  style='font-size:12.0pt;line-height:150%;font-family:"Times New Roman","serif"'></span></p>
+            <p class=MsoNormal style='text-indent:24.0pt;line-height:150%'><span lang=EN-US style='font-size:12.0pt;line-height:150%;font-family:"Times New Roman","serif"'>2</span>
+              <span  style='font-size:12.0pt;line-height:150%;font-family:宋体'>、通过填写本申请表，我确认并同意京投公司将出于人力资源、行政、信息安全等内部管理流程和对外法律遵从等目的处理我通过本申请表提交给京投公司的任何信息。</span></p>
+            <p class=MsoNormal style='text-indent:24.0pt;line-height:150%'><span  style='font-size:12.0pt;line-height:150%;font-family:宋体'>如果您想了解京投公司的更多情况、修改您的个人数据或对本声明有任何问题、评论、建议，或者需要对您的个人数据提出要求通过电子邮箱</span>
+              <span  lang=EN-US style='font-size:12.0pt;line-height:150%;font-family:"Times New Roman","serif"'>hr_system@bii.com.cn</span>
+              <span style='font-size:12.0pt;line-height:150%;font-family:宋体'>与我们联系。</span></p>
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn flat label="确认" color="primary" v-close-popup />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
 
@@ -422,7 +451,8 @@ export default {
           remark: '',
           schoolName: '' }]
       },
-      isNewResume: '1'
+      isNewResume: '1',
+      alertMsg: true
     }
   },
   computed: {
@@ -741,12 +771,14 @@ export default {
         console.log(res.data)
         if (res.data.data === 1) {
           this.isNewResume = '0'
+          this.alertMsg = false
           getResume().then(res => {
             this.EmployeeInfo = res.data.data
             console.log(this.EmployeeInfo)
           }).catch((err) => { return err })
         } else {
           this.isNewResume = '1'
+          this.alertMsg = true
           getUser().then(res => {
             this.EmployeeInfo.resumeNatural.cardNo = res.data.data.cardNo
             this.EmployeeInfo.resumeNatural.name = res.data.data.name

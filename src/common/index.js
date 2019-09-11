@@ -189,6 +189,17 @@ export const notiFail = () => {
   })
 }
 
+/* 无权限 */
+export const notAllow = () => {
+  Notify.create({
+    color: 'red-5',
+    textColor: 'white',
+    position: 'top',
+    icon: 'fas fa-exclamation-triangle',
+    message: '您没有权限'
+  })
+}
+
 /* 提交成功 */
 export const subSuccess = () => {
   Notify.create({

@@ -273,7 +273,7 @@
 import Vue from 'vue'
 import downloadExcel from 'vue-json-excel'
 import { whetherType, cardType, genderType, polityType, maritalType, areaType, cerType, familyType, awardType, SpecialType } from '../constant/index'
-import { getResumeList, getResumeByNo } from '../common/index'
+import { getResumeList, getResumeByNo, notAllow } from '../common/index'
 
 Vue.component('downloadExcel', downloadExcel)
 
@@ -295,17 +295,6 @@ export default {
       ResSpecialty: null,
       ResSpecial: null,
       ResDay: 30,
-      condition: {
-        ResName: null,
-        ResGender: null,
-        ResCertificate: null,
-        ResBirthday: null,
-        ResPolity: null,
-        ResCollege: null,
-        ResSpecialty: null,
-        ResSpecial: null,
-        ResDay: 30
-      },
 
       cerType,
       genderType,
@@ -333,41 +322,7 @@ export default {
         { name: 'empEdu', align: 'left', label: '教育经历', field: 'empEdu' },
         { name: 'empTel', align: 'left', label: '联系电话', field: 'empTel' }
       ],
-      data: [
-        {
-          cardNo: '411102199009160075',
-          empName: '张渊',
-          empGender: '男',
-          empBirthday: '1987-10-17',
-          empApply: '地铁城铁规划设计、投融资相关,地铁城铁规划设计、投融资相关',
-          empEdu: '大学本科-北京交通大学-交通运输（轨道交通复合型拔尖人才实验班）,硕士研究生-北京交通大学-交通运输规划与管理',
-          empTel: '13661280579',
-          empEmail: '2821946720@qq.com',
-          empInter: '农业银行海淀东区支行-阜石路二级支行-网点副行长（主持工作）,农业银行海淀东区支行-计财部-副经理,农业银行海淀东区支行-计财部-副经理,农业银行海淀东区支行-支行营业部-职员'
-        },
-        {
-          cardNo: '11010119931017251X',
-          empName: '厚德曜',
-          empGender: '男',
-          empBirthday: '1993-10-17',
-          empApply: '123,321',
-          empEdu: '大学本科-北京航空航天大学-生物医学工程,硕士研究生-清华大学-化学工程与技术',
-          empTel: '13521361899',
-          empEmail: '2768067560@qq.com',
-          empInter: '中国国际工程咨询有限公司-资源与环境业务部-项目经理助理'
-        },
-        {
-          cardNo: '110101199403079517',
-          empName: '张翰',
-          empGender: '男',
-          empBirthday: '1999-01-01',
-          empApply: '3,5',
-          empEdu: '博士研究生-清华-土木',
-          empTel: '18374628394',
-          empEmail: '123@qq.com',
-          empInter: ' '
-        }
-      ],
+      data: [],
 
       json_fields: {
         '姓名': 'empName',
@@ -736,11 +691,14 @@ export default {
         formData.append('ResSpecial', JSON.stringify(this.ResSpecial).replace(/","/g, '|').replace('["', '(').replace('"]', ')'))
       }
       formData.append('ResDay', this.ResDay)
+      this.filter = ''
       getResumeList(formData)
         .then(res => {
-          console.log(res.data.data)
-          console.log(this.data)
-          this.data = res.data.data
+          if (res.data.code === 200) {
+            this.data = res.data.data
+          } else if (res.data.code === 500) {
+            notAllow()
+          }
           return res
         })
         .catch((err) => {
