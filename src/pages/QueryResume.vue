@@ -117,6 +117,9 @@
         <q-card class="my-card bg-grey-1" style="width: 80%">
           <q-card-section class="row items-center">
             <div class="text-h6">简历信息</div>
+            <q-badge color="primary" @click="downloadResume" v-show="EmployeeInfo.resumeAttachment ? true : false">
+              <q-icon name="download" color="white" />下载原简历
+            </q-badge>
             <q-space />
             <q-btn icon="close" flat round dense v-close-popup />
           </q-card-section>
@@ -653,10 +656,12 @@ export default {
     // emulate fetching data from server
     removeRow () {
       this.loading = true
-      for (let i = this.data.length - 1; i >= 0; i--) {
-        if (this.data[i].cardNo === this.selected[0].cardNo) {
-          // this.data.splice(i, 1)
-          this.data = [...this.data.slice(0, i), ...this.data.slice(i + 1)]
+      if (this.selected && this.selected.length !== 0) {
+        for (let i = this.data.length - 1; i >= 0; i--) {
+          if (this.data[i].cardNo === this.selected[0].cardNo) {
+            // this.data.splice(i, 1)
+            this.data = [...this.data.slice(0, i), ...this.data.slice(i + 1)]
+          }
         }
       }
       this.loading = false
@@ -706,15 +711,20 @@ export default {
         })
     },
     queryDetail () {
-      getResumeByNo(this.selected[0].cardNo)
-        .then(res => {
-          this.viewDetail = true
-          this.EmployeeInfo = res.data.data
-          return res
-        })
-        .catch((err) => {
-          return err
-        })
+      if (this.selected && this.selected.length !== 0) {
+        getResumeByNo(this.selected[0].cardNo)
+          .then(res => {
+            this.viewDetail = true
+            this.EmployeeInfo = res.data.data
+            return res
+          })
+          .catch((err) => {
+            return err
+          })
+      }
+    },
+    downloadResume () {
+      window.open('https://imc.bii.com.cn/rect/download/attachment/' + this.selected[0].cardNo)
     }
   }
 }
