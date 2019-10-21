@@ -280,6 +280,4 @@ export const getResumeByNo = (value) => {
 }
 
 /* 发请求获取指定简历信息 */
-export const getResumeFile = () => {
-  return domainName + 'file/download/attachment/'
-}
+export const getResumeFile = domainName + `file/download/attachment/`

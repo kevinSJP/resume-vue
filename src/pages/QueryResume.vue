@@ -724,6 +724,7 @@ export default {
       }
     },
     downloadResume () {
+      // console.log(getResumeFile + this.selected[0].cardNo)
       window.open(getResumeFile + this.selected[0].cardNo)
     }
   }
