@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { Notify } from 'quasar'
-import { axiosInstance } from '../boot/axios'
+import { domainName, axiosInstance } from '../boot/axios'
 
 /* 提交前修改EmployeeInfo对象 */
 export const modifyEmployeeInfo = (value) => {
@@ -277,4 +277,9 @@ export const getResumeList = (value) => {
 /* 发请求获取指定简历信息 */
 export const getResumeByNo = (value) => {
   return axiosInstance.get(`/queryResumeInfo/${value}`)
+}
+
+/* 发请求获取指定简历信息 */
+export const getResumeFile = () => {
+  return domainName + 'file/download/attachment/'
 }

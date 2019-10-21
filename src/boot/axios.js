@@ -1,8 +1,10 @@
 import axios from 'axios'
 
+export const domainName = 'https://imc.bii.com.cn/rect/'
+
 const axiosInstance = axios.create({
   // baseURL: 'http://localhost:8083/',
-  baseURL: 'https://imc.bii.com.cn/rect/',
+  baseURL: domainName,
   timeout: 15000,
   headers: [{ 'Content-Type': 'application/x-www-form-urlencoded' }, { 'X-Custom-Header': 'foobar' }]
 })

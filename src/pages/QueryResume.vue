@@ -276,7 +276,7 @@
 import Vue from 'vue'
 import downloadExcel from 'vue-json-excel'
 import { whetherType, cardType, genderType, polityType, maritalType, areaType, cerType, familyType, awardType, SpecialType } from '../constant/index'
-import { getResumeList, getResumeByNo, notAllow } from '../common/index'
+import { getResumeList, getResumeByNo, notAllow, getResumeFile } from '../common/index'
 
 Vue.component('downloadExcel', downloadExcel)
 
@@ -724,7 +724,7 @@ export default {
       }
     },
     downloadResume () {
-      window.open('https://imc.bii.com.cn/rect/download/attachment/' + this.selected[0].cardNo)
+      window.open(getResumeFile + this.selected[0].cardNo)
     }
   }
 }
