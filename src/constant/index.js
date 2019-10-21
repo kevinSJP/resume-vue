@@ -2,6 +2,11 @@
 export const whetherType = [
   { value: '0', label: '否' },
   { value: '1', label: '是' }]
+// 申请类型
+export const applyType = [
+  { value: '9901', label: '校招' },
+  { value: '9902', label: '社招' },
+  { value: '9903', label: '猎头' }]
 // 证件类型
 export const cardType = [
   { value: '1', label: '大陆身份证' },

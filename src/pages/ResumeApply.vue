@@ -10,6 +10,7 @@
       autocomplete="off"
       spellcheck="false"
     >
+      <q-select ref="applyType" v-model="EmployeeInfo.applyType" :options="applyType" emit-value map-options label="招聘类型*" :rules="[val => !!val || '必填']" />
       <q-badge color="grey-6">
         校园招聘请在期望职位中填写管培职位类别。<br>
         社会招聘请在期望职位中填写具体职位名称。
@@ -47,7 +48,7 @@
 </template>
 
 <script>
-
+import { applyType } from '../constant/index'
 import { modifyEmployeeInfo, notiSuccess, notiFail, hasResume, getResume, getUser, putResume } from '../common/index'
 
 export default {
@@ -69,8 +70,11 @@ export default {
         employStatus: 'employStatus',
         hasResume: 0,
         integrity: 'integrity',
+        applyType: '',
+        isEntry: '0',
         name: ''
       },
+      applyType,
       hasError: ''
     }
   },
@@ -81,7 +85,8 @@ export default {
     onSubmit () {
       this.$refs.jobApply.validate()
       this.$refs.jobApply2.validate()
-      if (this.$refs.jobApply.hasError || this.$refs.jobApply2.hasError) {
+      this.$refs.applyType.validate()
+      if (this.$refs.jobApply.hasError || this.$refs.jobApply2.hasError || this.$refs.applyType.hasError) {
         this.formHasError = true
         this.hasError = this.formHasError
       } else {
