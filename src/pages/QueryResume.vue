@@ -57,7 +57,7 @@
                   <q-badge color="secondary">
                      {{ ResDay }} 天内更新简历
                   </q-badge>
-                  <q-slider v-model="ResDay" label :min="0" :max="90" class="on-right" style="width: 80%"/>
+                  <q-slider v-model="ResDay" label :min="0" :max="365" class="on-right" style="width: 80%"/>
                   <!--<q-badge color="secondary" multi-line>-->
                     <!--Model: "{{ ResCertificate }}"-->
                   <!--</q-badge>-->

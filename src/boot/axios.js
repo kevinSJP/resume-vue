@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const domainName = 'https://imc.bii.com.cn/rect/'
+export const domainName = 'https://mis.bii.com.cn/rect/'
 
 const axiosInstance = axios.create({
   // baseURL: 'http://localhost:8083/',
